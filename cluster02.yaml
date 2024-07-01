@@ -6,9 +6,8 @@ networking:
   ipFamily: dual
   disableDefaultCNI: true 
   podSubnet: 10.2.0.0/16,2001:db8:20:0::/56
+  serviceSubnet: 10.222.0.0/16
 nodes:
 - role: control-plane
-  
-- role: worker
   
 - role: worker
