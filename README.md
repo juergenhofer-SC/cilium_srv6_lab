@@ -51,6 +51,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 3.  kind create cluster --config cluster02.yaml
 
+4.  taahoju3@containerlab01:~/cilium_srv6_lab$ kind get clusters
+kubernetes-cluster01
+kubernetes-cluster02
+
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running.
