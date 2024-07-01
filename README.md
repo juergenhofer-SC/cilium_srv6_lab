@@ -10,7 +10,7 @@
 
 ## About <a name = "about"></a>
 
-Building a lab enviroment with two Kubernetes cluster, interconnected via SRv6. The enviroment is based on containerlab.
+Building a lab environment with two Kubernetes cluster, interconnected via SRv6. The environment is based on containerlab.
 
 ## High Level Overview <a name = "HLD"></a>
 
