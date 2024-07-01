@@ -12,7 +12,7 @@
 
 Building a lab enviroment with two Kubernetes cluster, interconnected via SRv6. The enviroment is based on containerlab.
 
-![Hig Level Overview](k8s_srv6_repo/cilium_srv6_lab/K8s_SRv6_LAB_HLD.png)
+![Hig Level Overview](/blob/main/K8s_SRv6_LAB_HLD.png)
 
 ## Getting Started <a name = "getting_started"></a>
 
