@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Kubernetes with Cilium and Segmentrouting IPv6 on Containerlab
 
 ## Table of Contents
@@ -81,6 +80,3 @@ Add notes about how to use the system.
 1. Download Cisco image form internal repo
      a. docker login $local.artifactory
      b. docker pull $local.artifactory/nso/ios-xr/xrd-control-plane:7.10.2
-
-=======
->>>>>>> bc6d326c17da2653114a3296c21b788509540d81
