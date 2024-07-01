@@ -33,8 +33,8 @@ These instructions will get you a copy of the project up and running on your loc
 	- echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] 		<https://baltocdn.com/helm/stable/debian/> all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
 
 **HowTo prepare for Cisco XRd**
-  1. Download Cisco image form internal repo
-	- docker login $local.artifactory
+ 1. Download Cisco image form internal repo
+     - docker login $local.artifactory
 	- docker pull $local.artifactory/nso/ios-xr/xrd-control-plane:7.10.2
 
 ### Installing
