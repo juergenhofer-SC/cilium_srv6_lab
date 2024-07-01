@@ -12,7 +12,7 @@
 
 Building a lab enviroment with two Kubernetes cluster, interconnected via SRv6. The enviroment is based on containerlab.
 
-## High Level Overview = "HLD"></a>
+## High Level Overview <a name = "HLD"></a>
 
 ![Hig Level Overview](https://github.com/juergenhofer-SC/cilium_srv6_lab/blob/main/K8s_SRv6_LAB_HLD.png)
 
