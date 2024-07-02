@@ -1,0 +1,8 @@
+hubble:
+  enabled: false
+  relay:
+    enabled: false
+nodeinit:
+  enabled: true
+ipam:
+  mode: cluster-pool
