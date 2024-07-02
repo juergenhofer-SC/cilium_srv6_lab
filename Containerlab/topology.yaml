@@ -37,10 +37,12 @@ topology:
 
     kubernetes_cluster01:
       kind: linux
+      image: nicolaka/netshoot:latest
       network-mode: container:control-plane
     
     kubernetes_cluster02:
       kind: linux
+      image: nicolaka/netshoot:latest
       network-mode: container:control-plane
 
   links:
