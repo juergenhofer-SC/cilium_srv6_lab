@@ -3,7 +3,7 @@ name: cilium_srv6_lab
 topology:
   kinds:
     cisco_xrd:
-      startup-config: xrd.cfg
+      #startup-config: xrd.cfg
       # image: ios-xr/xrd-control-plane:24.1.1
       image: nso-docker-local.artifactory.swisscom.com/nso/ios-xr/xrd-control-plane:7.10.2
 
