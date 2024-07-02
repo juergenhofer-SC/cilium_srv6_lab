@@ -36,6 +36,10 @@ These instructions will get you a copy of the project up and running on your loc
 	- curl <https://baltocdn.com/helm/signing.asc> | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
 	- sudo apt-get install apt-transport-https --yes
 	- echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] 		<https://baltocdn.com/helm/stable/debian/> all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+ 6. Install kubectx to switch easy beetween cluster context
+     (ref.: https://github.com/ahmetb/kubectx/)
+     sudo apt install kubectx
+ 
 
 **HowTo prepare for Cisco XRd**
  1. Download Cisco image form internal repo
@@ -44,21 +48,28 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running.
+**Create K8s cluster with kind**
 
-Say what the step will be
+ 1. kind create cluster --config cluster01.yaml 
+     Set kubectl context to "kind-kubernetes-cluster01" You can now use your cluster with: 
+     kubectl cluster-info --context kind-kubernetes-cluster01
 
-```
-Give the example
-```
+ 2. kind create cluster --config cluster02.yaml
 
-And repeat
+**Install Cilium CNI**
+  (ref: https://docs.isovalent.com/operations-guide/installation/clean-install.html)
+ 
+ 1. helm repo add isovalent https://helm.isovalent.com
+ 2. Create a cilium-enterprise-values.yaml
+     This file keep track of your Cilium Enterprise configuration!
+ 3. Run helm install command to deploy Cilium Enterprise
+     helm install cilium isovalent/cilium --version 1.15.6 \
+     --namespace kube-system -f cilium-enterprise-values.yaml
 
-```
-until finished
-```
+Now that the base installation for Cilium Enterprise is complete, you can explore and enable advanced features, like SRv6.
 
-End with an example of getting some data out of the system or using it for a little demo.
+**Cilium SRv6 L3VPN**
+
 
 ## Usage <a name = "usage"></a>
 
