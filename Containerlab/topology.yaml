@@ -1,0 +1,50 @@
+name: cilium_srv6_lab
+
+topology:
+  kinds:
+    cisco_xrd:
+      startup-config: xrd.cfg
+      # image: ios-xr/xrd-control-plane:24.1.1
+      image: nso-docker-local.artifactory.swisscom.com/nso/ios-xr/xrd-control-plane:7.10.2
+
+    # linux:
+    #   image: ubuntu:latest
+    #   binds:
+    #     - /home/docker/pkt_gen:/pkt_gen
+    #     - provision_linux.sh:/provision_linux.sh
+
+  nodes:
+    pe1:
+      kind: cisco_xrd
+      startup-config: pe01.cfg
+      mgmt-ipv4: 172.20.20.36
+      env:
+        loopback: 1.1.1.1
+
+    pe2:
+      kind: cisco_xrd
+      startup-config: pe02.cfg
+      mgmt-ipv4: 172.20.20.37
+      env:
+        loopback: 2.2.2.2
+
+    rr:
+      kind: cisco_xrd
+      startup-config: rr.cfg
+      mgmt-ipv4: 172.20.20.46
+      env:
+        loopback: 3.3.3.3
+
+    kubernetes_cluster01:
+      kind: linux
+      networking-mode: container:control-plane
+    
+    kubernetes_cluster02:
+      kind: linux
+      networking-mode: container:control-plane
+
+  links:
+    - endpoints: ["pe1:Gi0-0-0-0", "pe2:Gi0-0-0-0"]
+    - endpoints: ["pe1:Gi0-0-0-1", "rr:Gi0-0-0-0"]
+    - endpoints: ["pe2:Gi0-0-0-1", "rr:Gi0-0-0-1"]
+
