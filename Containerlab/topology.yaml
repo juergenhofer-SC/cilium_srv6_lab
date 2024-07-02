@@ -37,11 +37,11 @@ topology:
 
     kubernetes_cluster01:
       kind: linux
-      networking-mode: container:control-plane
+      network-mode: container:control-plane
     
     kubernetes_cluster02:
       kind: linux
-      networking-mode: container:control-plane
+      network-mode: container:control-plane
 
   links:
     - endpoints: ["pe1:Gi0-0-0-0", "pe2:Gi0-0-0-0"]
