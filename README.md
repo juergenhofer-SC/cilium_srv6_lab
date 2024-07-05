@@ -62,7 +62,7 @@ These instructions will get you a copy of the project up and running on your loc
  1. helm repo add isovalent https://helm.isovalent.com
  2. Create a cilium-enterprise-values.yaml
      This file keep track of your Cilium Enterprise configuration!
- 3. Run helm install command to deploy Cilium Enterprise
+ 3. Run helm install command to deploy Cilium Enterprise CNI
      helm install cilium isovalent/cilium --version 1.15.6 \
      --namespace kube-system -f cilium-enterprise-values.yaml
 

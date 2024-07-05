@@ -1,13 +1,26 @@
 # cluster01.yaml
 kind: Cluster
-name: kubernetes-cluster01
+name: cluster01
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
   ipFamily: dual
   disableDefaultCNI: true 
-  podSubnet: 10.1.0.0/16,2001:db8:10:0::/56
-  serviceSubnet: 10.111.0.0/16
+  podSubnet: 10.1.0.0/16,2001:db8:10:0::/63
+  serviceSubnet: 10.111.0.0/16,2001:beaf:1::/108
 nodes:
 - role: control-plane
-  
+  kubeadmConfigPatches:
+  - |
+    kind: InitConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-ip: "172.10.10.2,fd00:172:10:10::2"
+#BGP local peer address
 - role: worker
+  kubeadmConfigPatches:
+  - |
+    kind: JoinConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-ip: "172.10.10.3,fd00:172:10:10::3"
+#BGP local peer address
