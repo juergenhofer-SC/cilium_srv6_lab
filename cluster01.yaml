@@ -14,6 +14,6 @@ nodes:
     kind: InitConfiguration
     nodeRegistration:
       kubeletExtraArgs:
-        node-ip: "172.10.10.2,beaf:172:10:10::2"
+        node-ip: "172.100.100.2,beaf:172:100:100::2"
 #BGP local peer address
 - role: worker
