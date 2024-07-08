@@ -48,10 +48,10 @@ topology:
       - ip route add 10.0.0.0/8 via 172.100.100.1 dev net0
       - ip route add fd00::/16 via beaf:172:100:100::1 dev net0
 
-    cl01server02:
-      kind: linux
-      image: nicolaka/netshoot:latest
-      network-mode: container:cluster01-worker
+    # cl01server02:
+    #   kind: linux
+    #   image: nicolaka/netshoot:latest
+    #   network-mode: container:cluster01-worker
       
 
 # Note: BGP local peer is from control-plane only
@@ -68,10 +68,10 @@ topology:
       - ip route add 10.0.0.0/8 via 172.20.20.1 dev net0
       - ip route add fd00::/16 via beaf:172:200:200::1 dev net0
 
-    cl02server02:
-      kind: linux
-      image: nicolaka/netshoot:latest
-      network-mode: container:cluster02-worker
+    # cl02server02:
+    #   kind: linux
+    #   image: nicolaka/netshoot:latest
+    #   network-mode: container:cluster02-worker
 
   links:
     - endpoints: ["pe1:Gi0-0-0-0", "pe2:Gi0-0-0-0"]
