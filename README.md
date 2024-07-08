@@ -74,3 +74,23 @@ Now that the base installation for Cilium Enterprise is complete, you can explor
 ## Usage <a name = "usage"></a>
 
 Add notes about how to use the system.
+
+ kind delete clusters --all
+  323  kubectx
+  324  git pull
+  325  kind create cluster --config cluster01.yaml 
+  326  helm install cilium isovalent/cilium --version 1.15.6      --namespace kube-system -f cilium-enterprise-values.yaml
+  327  kind create cluster --config cluster02.yaml 
+  328  kubectx
+  329  kubectx kind-cluster02
+  330  helm install cilium isovalent/cilium --version 1.15.6      --namespace kube-system -f cilium-enterprise-values.yaml
+  331  kubectx kind-cluster01
+  332  kubectx
+
+  ----
+  339  ip netns list
+  340  docker ps
+  341  docker inspect --format '{{ .State.Pid }}' <CONTAINER_ID>
+  342  docker inspect --format '{{ .State.Pid }}' caa38fbde54a
+  343  nsenter -t 12692 -n ip addr
+  344  sudo nsenter -t 12692 -n ip addr
