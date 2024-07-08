@@ -17,10 +17,3 @@ nodes:
         node-ip: "172.20.20.2,fd00:172:20:20::2"
 #BGP local peer address
 - role: worker
-  kubeadmConfigPatches:
-  - |
-    kind: JoinConfiguration
-    nodeRegistration:
-      kubeletExtraArgs:
-        node-ip: "172.20.20.3,fd00:172:20:20::3"
-#BGP local peer address

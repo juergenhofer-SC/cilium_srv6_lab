@@ -36,32 +36,26 @@ topology:
         loopback: 3.3.3.3
 
 # Note: BGP local peer is from control-plane only
-# node-ip: "172.10.10.2,fd00:172:10:10::2"
+# node-ip: "172.10.10.2,beef:172:10:10::2"
     cl01server01:
       kind: linux
       image: nicolaka/netshoot:latest
       network-mode: container:cluster01-control-plane
       exec:
       - ip addr add 172.10.10.2/24 dev net0
-      - ip addr add fd00:172:10:10::2/64 dev net0
+      - ip addr add beaf:172:10:10::2/64 dev net0
       # These static routes are needed because Cilium cannot import routes currently.
       - ip route add 10.0.0.0/8 via 172.10.10.1 dev net0
       - ip route add fd00::/16 via fd00:172:10:10::1 dev net0
 
-# node-ip: "172.10.10.3,fd00:172:10:10::3"    
     cl01server02:
       kind: linux
       image: nicolaka/netshoot:latest
       network-mode: container:cluster01-worker
-      exec:
-      - ip addr add 172.10.10.3/24 dev net0
-      - ip addr add fd00:172:10:10::3/64 dev net0
-      # These static routes are needed because Cilium cannot import routes currently.
-      - ip route add 10.0.0.0/8 via 172.10.10.1 dev net0
-      - ip route add fd00::/16 via fd00:172:10:10::1 dev net0
+      
 
 # Note: BGP local peer is from control-plane only
-# node-ip: "172.20.20.2,fd00:172:20:20::2"
+# node-ip: "172.20.20.2,beef:172:20:20::2"
 
     cl02server01:
       kind: linux
@@ -69,22 +63,15 @@ topology:
       network-mode: container:cluster02-control-plane
       exec:
       - ip addr add 172.20.20.2/24 dev net0
-      - ip addr add fd00:172:20:20::2/64 dev net0
+      - ip addr add beaf:172:20:20::2/64 dev net0
       # These static routes are needed because Cilium cannot import routes currently.
       - ip route add 10.0.0.0/8 via 172.20.20.1 dev net0
       - ip route add fd00::/16 via fd00:172:20:20::1 dev net0
 
-# node-ip: "172.20.20.3,fd00:172:20:20::3"    
     cl02server02:
       kind: linux
       image: nicolaka/netshoot:latest
       network-mode: container:cluster02-worker
-      exec:
-      - ip addr add 172.20.20.3/24 dev net0
-      - ip addr add fd00:172:20:20::3/64 dev net0
-      # These static routes are needed because Cilium cannot import routes currently.
-      - ip route add 10.0.0.0/8 via 172.20.20.1 dev net0
-      - ip route add fd00::/16 via fd00:172:20:20::1 dev net0
 
   links:
     - endpoints: ["pe1:Gi0-0-0-0", "pe2:Gi0-0-0-0"]
