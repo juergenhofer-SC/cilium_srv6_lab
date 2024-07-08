@@ -1,6 +1,6 @@
 # cluster02.yaml
 kind: Cluster
-name: cluster02
+name: clab-cilium-srv6-lab-cluster02
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
   ipFamily: dual

@@ -1,4 +1,4 @@
-name: cilium_srv6_lab
+name: cilium-srv6-lab
 
 topology:
   kinds:
