@@ -40,7 +40,7 @@ topology:
     cl01server01:
       kind: linux
       image: nicolaka/netshoot:latest
-      network-mode: container:clab-cilium-srv6-lab-cluster01-control-plane
+      network-mode: container:cilium-srv6-lab-cluster01-control-plane
       exec:
       - ip addr add 172.100.100.2/24 dev net0
       - ip addr add beaf:172:100:100::2/64 dev net0
@@ -51,7 +51,7 @@ topology:
     cl01server02:
       kind: linux
       image: nicolaka/netshoot:latest
-      network-mode: container:clab-cilium-srv6-lab-cluster01-worker
+      network-mode: container:cilium-srv6-lab-cluster01-worker
       
 
 # Note: BGP local peer is from control-plane only
@@ -60,7 +60,7 @@ topology:
     cl02server01:
       kind: linux
       image: nicolaka/netshoot:latest
-      network-mode: container:clab-cilium-srv6-lab-cluster02-control-plane
+      network-mode: container:cilium-srv6-lab-cluster02-control-plane
       exec:
       - ip addr add 172.200.200.2/24 dev net0
       - ip addr add beaf:172:200:200::2/64 dev net0
@@ -71,7 +71,7 @@ topology:
     cl02server02:
       kind: linux
       image: nicolaka/netshoot:latest
-      network-mode: container:clab-cilium-srv6-lab-cluster02-worker
+      network-mode: container:cilium-srv6-lab-cluster02-worker
 
   links:
     - endpoints: ["pe1:Gi0-0-0-0", "pe2:Gi0-0-0-0"]
