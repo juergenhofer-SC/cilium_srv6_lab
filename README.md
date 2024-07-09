@@ -43,8 +43,21 @@ These instructions will get you a copy of the project up and running on your loc
 
 **HowTo prepare for Cisco XRd**
  1. Download Cisco image form internal repo
-     - docker login $local.artifactory
+     	- docker login $local.artifactory
 	- docker pull $local.artifactory/nso/ios-xr/xrd-control-plane:7.10.2
+
+**Create K8s cluster with kind**
+1.  kind create cluster --config cluster01.yaml
+   	Set kubectl context to "kind-kubernetes-cluster01"
+	You can now use your cluster with:
+
+	kubectl cluster-info --context kind-kubernetes-cluster01
+
+3.  kind create cluster --config cluster02.yaml
+
+4.  taahoju3@containerlab01:~/cilium_srv6_lab$ kind get clusters
+kubernetes-cluster01
+kubernetes-cluster02
 
 ### Installing
 
