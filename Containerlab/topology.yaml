@@ -40,7 +40,6 @@ topology:
     cilium-srv6-lab-cluster01-control-plane:
       kind: ext-container
       image: nicolaka/netshoot:latest
-      network-mode: container:cilium-srv6-lab-cluster01-control-plane
       exec:
       - ip addr add 172.100.100.2/24 dev net0
       - ip addr add fd00:172:100:100::2/64 dev net0
@@ -51,15 +50,13 @@ topology:
     cilium-srv6-lab-cluster01-worker:
       kind: ext-container
       image: nicolaka/netshoot:latest
-      network-mode: container:cilium-srv6-lab-cluster01-worker
-      
+     
 
 # Note: BGP local peer is from control-plane only
 # node-ip: "172.200.200.2,fd00:172:200:200::2"
     cilium-srv6-lab-cluster02-control-plane:
       kind: ext-container
       image: nicolaka/netshoot:latest
-      network-mode: container:cilium-srv6-lab-cluster02-control-plane
       exec:
       - ip addr add 172.200.200.2/24 dev net0
       - ip addr add fd00:172:200:200::2/64 dev net0
@@ -70,7 +67,6 @@ topology:
     cilium-srv6-lab-cluster02-worker:
       kind: ext-container
       image: nicolaka/netshoot:latest
-      network-mode: container:cilium-srv6-lab-cluster02-worker
 
   links:
     - endpoints: ["pe1:Gi0-0-0-0", "pe2:Gi0-0-0-0"]
