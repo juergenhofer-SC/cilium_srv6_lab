@@ -91,6 +91,8 @@ Add notes about how to use the system.
 
 sudo clab --log-level debug -t topology.yaml destroy
 sudo clab --log-level debug -t topology.yaml deploy
+sudo clab --log-level debug -t topology.yaml deploy --reconfigure
+
 
   ----
   339  ip netns list

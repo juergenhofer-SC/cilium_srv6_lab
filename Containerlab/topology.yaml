@@ -73,7 +73,4 @@ topology:
     - endpoints: ["pe1:Gi0-0-0-1", "rr:Gi0-0-0-0"]
     - endpoints: ["pe2:Gi0-0-0-1", "rr:Gi0-0-0-1"]
     - endpoints: ["cilium-srv6-lab-cluster01-control-plane:net0", "pe1:Gi0-0-0-2"]
-    #- endpoints: ["cilium-srv6-lab-cluster01-control-plane:net1", "rr:Gi0-0-0-2"]
     - endpoints: ["cilium-srv6-lab-cluster02-control-plane:net0", "pe2:Gi0-0-0-2"]
-    #- endpoints: ["cilium-srv6-lab-cluster02-control-plane:net1", "rr:Gi0-0-0-3"]
-
