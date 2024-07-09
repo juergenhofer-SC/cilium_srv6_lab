@@ -78,7 +78,7 @@ topology:
     - endpoints: ["pe1:Gi0-0-0-1", "rr:Gi0-0-0-0"]
     - endpoints: ["pe2:Gi0-0-0-1", "rr:Gi0-0-0-1"]
     - endpoints: ["cl01server01:net0", "pe1:Gi0-0-0-2"]
-    - endpoints: ["cl01server01:net1", "rr:Gi0-0-0-2"]
+    #- endpoints: ["cl01server01:net1", "rr:Gi0-0-0-2"]
     - endpoints: ["cl02server01:net0", "pe2:Gi0-0-0-2"]
-    - endpoints: ["cl02server01:net1", "rr:Gi0-0-0-3"]
+    #- endpoints: ["cl02server01:net1", "rr:Gi0-0-0-3"]
 
