@@ -16,21 +16,21 @@ topology:
   nodes:
     pe1:
       kind: cisco_xrd
-      #startup-config: pe01.cfg
+      startup-config: pe01.cfg
       mgmt-ipv4: 172.20.20.36
       env:
         loopback: 1.1.1.1
 
     pe2:
       kind: cisco_xrd
-      #startup-config: pe02.cfg
+      startup-config: pe02.cfg
       mgmt-ipv4: 172.20.20.37
       env:
         loopback: 2.2.2.2
 
     rr:
       kind: cisco_xrd
-      #startup-config: rr.cfg
+      startup-config: rr.cfg
       mgmt-ipv4: 172.20.20.46
       env:
         loopback: 3.3.3.3
