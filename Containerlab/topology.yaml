@@ -14,48 +14,26 @@ topology:
     #     - provision_linux.sh:/provision_linux.sh
 
   nodes:
-    xrd01:
+    pe1:
       kind: cisco_xrd
-      mgmt-ipv4: 172.20.20.201
-      mgmt-ipv6: 2001:172:20:20::201
-      startup-config: 7-node-config/xrd01.cfg
+      startup-config: pe01.cfg
+      mgmt-ipv4: 172.20.20.36
+      env:
+        loopback: 1.1.1.1
 
-    xrd02:
+    pe2:
       kind: cisco_xrd
-      mgmt-ipv4: 172.20.20.202
-      mgmt-ipv6: 2001:172:20:20::202
-      startup-config: 7-node-config/xrd02.cfg
+      startup-config: pe02.cfg
+      mgmt-ipv4: 172.20.20.37
+      env:
+        loopback: 2.2.2.2
 
-    xrd03:
+    rr:
       kind: cisco_xrd
-      mgmt-ipv4: 172.20.20.203
-      mgmt-ipv6: 2001:172:20:20::203
-      startup-config: 7-node-config/xrd03.cfg
-
-    xrd04:
-      kind: cisco_xrd
-      mgmt-ipv4: 172.20.20.204
-      mgmt-ipv6: 2001:172:20:20::204
-      startup-config: 7-node-config/xrd04.cfg
-
-    xrd05:
-      kind: cisco_xrd
-      mgmt-ipv4: 172.20.20.205
-      mgmt-ipv6: 2001:172:20:20::205
-      startup-config: 7-node-config/xrd05.cfg
-
-    xrd06:
-      kind: cisco_xrd
-      mgmt-ipv4: 172.20.20.206
-      mgmt-ipv6: 2001:172:20:20::206
-      startup-config: 7-node-config/xrd06.cfg
-
-    xrd07:
-      kind: cisco_xrd
-      mgmt-ipv4: 172.20.20.207
-      mgmt-ipv6: 2001:172:20:20::207
-      startup-config: 7-node-config/xrd07.cfg
-
+      startup-config: rr.cfg
+      mgmt-ipv4: 172.20.20.46
+      env:
+        loopback: 3.3.3.3
 
 # Note: BGP local peer is from control-plane only
 # node-ip: "172.100.100.2,fd00:172:100:100::2"
