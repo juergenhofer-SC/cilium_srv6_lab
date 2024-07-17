@@ -19,7 +19,8 @@ topology:
       startup-config: pe01.cfg
       mgmt-ipv4: 172.20.20.36
       env:
-        loopback: 1.1.1.1
+        loopback_v4: 1.1.1.1
+        loopback_v6: fc00:0:1111::1/128
 
     pe2:
       kind: cisco_xrd
@@ -27,6 +28,7 @@ topology:
       mgmt-ipv4: 172.20.20.37
       env:
         loopback: 2.2.2.2
+        loopback_v6: fc00:0:2222::1/128
 
     rr:
       kind: cisco_xrd
@@ -34,6 +36,8 @@ topology:
       mgmt-ipv4: 172.20.20.46
       env:
         loopback: 3.3.3.3
+        loopback_v6: fc00:0:3333::1/128
+
 
 # Note: BGP local peer is from control-plane only
 # node-ip: "172.100.100.2,fd00:172:100:100::2"
