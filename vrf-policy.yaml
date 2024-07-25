@@ -20,7 +20,7 @@ kind: IsovalentVRF
 metadata:
   name: vrf02
 spec:
-  vrfID: 1
+  vrfID: 2
   importRouteTarget: "65002:2"
   exportRouteTarget: "65002:2"
   rules:
