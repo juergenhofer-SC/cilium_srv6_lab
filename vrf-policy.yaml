@@ -1,0 +1,32 @@
+---
+apiVersion: isovalent.com/v1alpha1
+kind: IsovalentVRF
+metadata:
+  name: vrf01
+spec:
+  vrfID: 1
+  importRouteTarget: "65001:1"
+  exportRouteTarget: "65001:1"
+  rules:
+  - selectors:
+    - endpointSelector:
+        matchLabels:
+          vrf: vrf01
+    destinationCIDRs:
+    - 0.0.0.0/0
+---
+apiVersion: isovalent.com/v1alpha1
+kind: IsovalentVRF
+metadata:
+  name: vrf02
+spec:
+  vrfID: 1
+  importRouteTarget: "65002:2"
+  exportRouteTarget: "65002:2"
+  rules:
+  - selectors:
+    - endpointSelector:
+        matchLabels:
+          vrf: vrf02
+    destinationCIDRs:
+    - 0.0.0.0/0
