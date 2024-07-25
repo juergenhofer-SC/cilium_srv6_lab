@@ -14,12 +14,6 @@ spec:
     neighbors:
     - peerAddress: "fd00:172:100:100::1/128"
       peerASN: 65000
-      connectRetryTimeSeconds: 120
-      holdTimeSeconds: 180
-      keepAliveTimeSeconds: 60
-      gracefulRestart:
-        enabled: true
-        restartTimeSeconds: 120
       families:
        - {afi: "ipv4", safi: "mpls_vpn"}
        - {afi: "ipv6", safi: "mpls_vpn"}
@@ -39,12 +33,6 @@ spec:
     neighbors:
     - peerAddress: "fd00:172:200:200::1/128"
       peerASN: 65000
-      connectRetryTimeSeconds: 120
-      holdTimeSeconds: 180
-      keepAliveTimeSeconds: 60
-      gracefulRestart:
-        enabled: true
-        restartTimeSeconds: 120
       families:
        - {afi: "ipv4", safi: "mpls_vpn"}
        - {afi: "ipv6", safi: "mpls_vpn"}
