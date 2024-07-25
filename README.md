@@ -135,3 +135,22 @@ local-path-storage   local-path-provisioner-988d74bc-lkh9n                      
 taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl -n kube-system logs cilium-gs6zs | grep "Allocated SID"
 Defaulted container "cilium-agent" out of: cilium-agent, config (init), mount-cgroup (init), apply-sysctl-overwrites (init), mount-bpf-fs (init), clean-cilium-state (init), install-cni-binaries (init)
 time="2024-07-25T08:54:17Z" level=info msg="Allocated SID for VRF with export route target." ExportRouteTarget="65001:1" LocatorPool= SID="2001:dead:10:1::adee" VRF=vrf01 component=srv6.Manager.createIngressPathVRFs subsys=srv6-manager
+
+
+taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl get pods --all-namespaces
+NAMESPACE            NAME                                                              READY   STATUS    RESTARTS        AGE
+kube-system          cilium-gpq6r                                                      1/1     Running   1 (2d9h ago)    16d
+kube-system          cilium-jrcsv                                                      1/1     Running   1 (2d9h ago)    16d
+kube-system          cilium-operator-5d64f7b64d-9nvz4                                  1/1     Running   2 (2d9h ago)    16d
+kube-system          cilium-operator-5d64f7b64d-crmlv                                  1/1     Running   32 (2d9h ago)   16d
+kube-system          coredns-7db6d8ff4d-89xpw                                          1/1     Running   1 (2d9h ago)    16d
+kube-system          coredns-7db6d8ff4d-dswbm                                          1/1     Running   1 (2d9h ago)    16d
+kube-system          etcd-cilium-srv6-lab-cluster02-control-plane                      1/1     Running   0               2d9h
+kube-system          kube-apiserver-cilium-srv6-lab-cluster02-control-plane            1/1     Running   0               2d9h
+kube-system          kube-controller-manager-cilium-srv6-lab-cluster02-control-plane   1/1     Running   2 (2d9h ago)    16d
+kube-system          kube-proxy-5sgkn                                                  1/1     Running   2 (2d9h ago)    16d
+kube-system          kube-proxy-cg9m4                                                  1/1     Running   27 (2d9h ago)   16d
+kube-system          kube-scheduler-cilium-srv6-lab-cluster02-control-plane            1/1     Running   2 (2d9h ago)    16d
+local-path-storage   local-path-provisioner-988d74bc-tlvct                             1/1     Running   1 (2d9h ago)    16d
+
+time="2024-07-25T13:29:18Z" level=info msg="Allocated SID for VRF with export route target." ExportRouteTarget="65002:2" LocatorPool= SID="2001:db8:20::d80" VRF=vrf02 component=srv6.Manager.createIngressPathVRFs subsys=srv6-manager
