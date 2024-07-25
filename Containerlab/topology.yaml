@@ -62,8 +62,6 @@ topology:
 # Note: BGP local peer is from control-plane only
 # node-ip: "172.200.200.2,fd00:172:200:200::2"
 #
-# annotations are required to configure the node
-# responds to VPNv4 routes.
     cilium-srv6-lab-cluster02-control-plane:
       kind: ext-container
       image: nicolaka/netshoot:latest
