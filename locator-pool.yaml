@@ -14,7 +14,7 @@ spec:
     locatorNodeLenBits: 16
     functionLenBits: 32
     argumentLenBits: 0
-  ---
+---
 apiVersion: isovalent.com/v1alpha1
 kind: IsovalentSRv6LocatorPool
 metadata:
