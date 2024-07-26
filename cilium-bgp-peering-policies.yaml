@@ -2,11 +2,11 @@
 apiVersion: "cilium.io/v2alpha1"
 kind: CiliumBGPPeeringPolicy
 metadata:
-  name: cilium01
+  name: cilium-srv6-lab-cluster01-control-plane
 spec:
   nodeSelector:
     matchLabels:
-      kubernetes.io/hostname: cilium-srv6-lab-cluster01-control-plane
+      kubernetes.io/hostname: "cilium-srv6-lab-cluster01-control-plane"
   virtualRouters:
   - localASN: 65001
     srv6LocatorPoolSelector:
@@ -30,11 +30,11 @@ spec:
 apiVersion: "cilium.io/v2alpha1"
 kind: CiliumBGPPeeringPolicy
 metadata:
-  name: cilium02
+  name: cilium-srv6-lab-cluster02-control-plane
 spec:
   nodeSelector:
     matchLabels:
-      kubernetes.io/hostname: cilium-srv6-lab-cluster02-control-plane
+      kubernetes.io/hostname: "cilium-srv6-lab-cluster02-control-plane"
   virtualRouters:
   - localASN: 65002
     srv6LocatorPoolSelector:
@@ -42,7 +42,6 @@ spec:
           export: "true"
     neighbors:
     # Advertises a locator prefix to the underlay network with eBGP
-    neighbors:
     - peerAddress: "fd00:172:200:200::1/128"
       peerASN: 65000
       families:
