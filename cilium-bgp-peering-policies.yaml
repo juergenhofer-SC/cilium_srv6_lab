@@ -9,14 +9,15 @@ spec:
       kubernetes.io/hostname: cilium-srv6-lab-cluster01-control-plane
   virtualRouters:
   - localASN: 65001
-    exportPodCIDR: true
-    mapSRv6VRFs: true
+    srv6LocatorPoolSelector:
+        matchLabels:
+          export: "true"
     neighbors:
-    - peerAddress: "fd00:172:100:100::1/128"
-      peerASN: 65000
+    # Advertises a locator prefix to the underlay network with eBGP
+    - peerASN: 65000
+      peerAddress: "fd00:172:100:100::1/128"
       families:
-       - {afi: "ipv4", safi: "mpls_vpn"}
-       - {afi: "ipv6", safi: "mpls_vpn"}
+       - {afi: "ipv6", safi: "unicast"}
 ---
 apiVersion: "cilium.io/v2alpha1"
 kind: CiliumBGPPeeringPolicy
@@ -28,11 +29,13 @@ spec:
       kubernetes.io/hostname: cilium-srv6-lab-cluster02-control-plane
   virtualRouters:
   - localASN: 65002
-    exportPodCIDR: true
-    mapSRv6VRFs: true
+    srv6LocatorPoolSelector:
+        matchLabels:
+          export: "true"
+    neighbors:
+    # Advertises a locator prefix to the underlay network with eBGP
     neighbors:
     - peerAddress: "fd00:172:200:200::1/128"
       peerASN: 65000
       families:
-       - {afi: "ipv4", safi: "mpls_vpn"}
-       - {afi: "ipv6", safi: "mpls_vpn"}
+       - {afi: "ipv6", safi: "unicast"}

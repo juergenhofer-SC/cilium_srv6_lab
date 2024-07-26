@@ -5,8 +5,8 @@ metadata:
   name: vrf01
 spec:
   vrfID: 1
-  importRouteTarget: "65001:1"
   exportRouteTarget: "65001:1"
+  locatorPoolRef: pool01
   rules:
   - selectors:
     - endpointSelector:
@@ -21,8 +21,8 @@ metadata:
   name: vrf02
 spec:
   vrfID: 2
-  importRouteTarget: "65002:2"
   exportRouteTarget: "65002:2"
+  locatorPoolRef: pool02
   rules:
   - selectors:
     - endpointSelector:
