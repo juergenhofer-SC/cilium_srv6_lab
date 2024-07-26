@@ -18,6 +18,13 @@ spec:
       peerAddress: "fd00:172:100:100::1/128"
       families:
        - {afi: "ipv6", safi: "unicast"}
+    # Advertise VPN route trough route-server, 
+    # peering with lo0 needs static route to reach it
+    - peerASN: 65000
+      peerAddress: "fc00:0:3333::1/128"
+      families:
+       - {afi: "ipv4", safi: "mpls_vpn"}
+
 ---
 apiVersion: "cilium.io/v2alpha1"
 kind: CiliumBGPPeeringPolicy
@@ -39,3 +46,9 @@ spec:
       peerASN: 65000
       families:
        - {afi: "ipv6", safi: "unicast"}
+    # Advertise VPN route trough route-server, 
+    # peering with lo0 needs static route to reach it
+    - peerASN: 65000
+      peerAddress: "fc00:0:3333::1/128"
+      families:
+       - {afi: "ipv4", safi: "mpls_vpn"}
