@@ -8,7 +8,7 @@ metadata:
 spec:
   behaviorType: uSID
   prefix: fd00:1::/48
-  locatorLenBits: 64 <= Explicitly specify locator length
+  locatorLenBits: 64
   structure:
     locatorBlockLenBits: 32
     locatorNodeLenBits: 16
@@ -25,7 +25,7 @@ metadata:
 spec:
   behaviorType: uSID
   prefix: fd00:2::/48
-  locatorLenBits: 64 <= Explicitly specify locator length
+  locatorLenBits: 64
   structure:
     locatorBlockLenBits: 32
     locatorNodeLenBits: 16
