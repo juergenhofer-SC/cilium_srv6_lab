@@ -20,7 +20,7 @@ spec:
        - {afi: "ipv6", safi: "unicast"}
     # Advertise VPN route trough route-server, 
     # peering with lo0 needs static route to reach it
-    - peerASN: 65001
+    - peerASN: 65000
       peerAddress: "fc00:0:3333::1/128"
       families:
        - {afi: "ipv4", safi: "mpls_vpn"}
@@ -48,7 +48,7 @@ spec:
        - {afi: "ipv6", safi: "unicast"}
     # Advertise VPN route trough route-server, 
     # peering with lo0 needs static route to reach it
-    - peerASN: 65001
+    - peerASN: 65000
       peerAddress: "fc00:0:3333::1/128"
       families:
        - {afi: "ipv4", safi: "mpls_vpn"}
