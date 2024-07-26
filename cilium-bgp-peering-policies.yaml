@@ -22,6 +22,7 @@ spec:
     # peering with lo0 needs static route to reach it
     - peerASN: 65000
       peerAddress: "fc00:0:3333::1/128"
+      eBGPMultihopTTL: 255
       families:
        - {afi: "ipv4", safi: "mpls_vpn"}
 
@@ -50,5 +51,6 @@ spec:
     # peering with lo0 needs static route to reach it
     - peerASN: 65000
       peerAddress: "fc00:0:3333::1/128"
+      eBGPMultihopTTL: 255
       families:
        - {afi: "ipv4", safi: "mpls_vpn"}
