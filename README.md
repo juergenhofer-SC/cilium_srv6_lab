@@ -76,7 +76,7 @@ kubernetes-cluster02
  2. Create a cilium-enterprise-values.yaml
      This file keep track of your Cilium Enterprise configuration!
  3. Run helm install command to deploy Cilium Enterprise CNI
-     helm install cilium isovalent/cilium --version 1.15.6 \
+     helm install cilium isovalent/cilium --version 1.15.7 \
      --namespace kube-system -f cilium-enterprise-values.yaml
 
 Now that the base installation for Cilium Enterprise is complete, you can explore and enable advanced features, like SRv6.
@@ -92,19 +92,18 @@ Add notes about how to use the system.
   323  kubectx
   324  git pull
   325  kind create cluster --config cluster01.yaml 
-  326  helm install cilium isovalent/cilium --version 1.15.6 --namespace kube-system -f cilium-enterprise-values.yaml
+  326  helm install cilium isovalent/cilium --version 1.15.7 --namespace kube-system -f cilium-enterprise-values.yaml
   327  kind create cluster --config cluster02.yaml 
   328  kubectx
   329  kubectx kind-cluster02
-  330  helm install cilium isovalent/cilium --version 1.15.6 --namespace kube-system -f cilium-enterprise-values.yaml
+  330  helm install cilium isovalent/cilium --version 1.15.7 --namespace kube-system -f cilium-enterprise-values.yaml
   331  kubectx kind-cluster01
   332  kubectx
 
 
 
-sudo clab --log-level debug -t topology.yaml destroy
-sudo clab --log-level debug -t topology.yaml deploy
-sudo clab --log-level debug -t topology.yaml deploy --reconfigure
+ 835  sudo clab destroy --cleanup -t Containerlab/topology.yaml
+  836  sudo clab deploy -t Containerlab/topology.yaml
 
 
   ----
@@ -154,3 +153,16 @@ kube-system          kube-scheduler-cilium-srv6-lab-cluster02-control-plane     
 local-path-storage   local-path-provisioner-988d74bc-tlvct                             1/1     Running   1 (2d9h ago)    16d
 
 time="2024-07-25T13:29:18Z" level=info msg="Allocated SID for VRF with export route target." ExportRouteTarget="65002:2" LocatorPool= SID="2001:db8:20::d80" VRF=vrf02 component=srv6.Manager.createIngressPathVRFs subsys=srv6-manager
+
+
+
+taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl get sidmanager -o custom-columns="NAME:.metadata.name,ALLOCATIONS:.spec.locatorAllocations"
+NAME                                      ALLOCATIONS
+cilium-srv6-lab-cluster01-control-plane   [map[locators:[map[behaviorType:uSID prefix:fd00:1:0:25bc::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool01] map[locators:[map[behaviorType:uSID prefix:fd00:2:0:fbb9::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool02]]
+cilium-srv6-lab-cluster01-worker          [map[locators:[map[behaviorType:uSID prefix:fd00:1:0:8d63::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool01] map[locators:[map[behaviorType:uSID prefix:fd00:2:0:430f::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool02]]
+
+
+taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl get sidmanager -o custom-columns="NAME:.metadata.name,ALLOCATIONS:.spec.locatorAllocations"
+NAME                                      ALLOCATIONS
+cilium-srv6-lab-cluster02-control-plane   [map[locators:[map[behaviorType:uSID prefix:fd00:1:0:6b87::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool01] map[locators:[map[behaviorType:uSID prefix:fd00:2:0:12f6::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool02]]
+cilium-srv6-lab-cluster02-worker          [map[locators:[map[behaviorType:uSID prefix:fd00:1:0:a236::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool01] map[locators:[map[behaviorType:uSID prefix:fd00:2:0:5b2f::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool02]]
