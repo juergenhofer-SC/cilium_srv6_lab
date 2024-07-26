@@ -53,6 +53,8 @@ topology:
       # These static routes are needed because Cilium cannot import routes currently.
       - ip route add 10.0.0.0/8 via 172.100.100.1 dev net0
       - ip route add fd00::/16 via fd00:172:100:100::1 dev net0
+      # static route for route reflector
+      - ip route add fc00:0:3333::1/128 via fd00:172:100:100::1 dev net0
 
     cilium-srv6-lab-cluster01-worker:
       kind: ext-container
@@ -73,6 +75,8 @@ topology:
       # These static routes are needed because Cilium cannot import routes currently.
       - ip route add 10.0.0.0/8 via 172.200.200.1 dev net0
       - ip route add fd00::/16 via fd00:172:200:200::1 dev net0
+      # static route for route reflector
+      - ip route add fc00:0:3333::1/128 via fd00:172:200:200::1 dev net0
 
     cilium-srv6-lab-cluster02-worker:
       kind: ext-container
