@@ -6,7 +6,7 @@ metadata:
 spec:
   vrfID: 1
   exportRouteTarget: "65001:1"
-  locatorPoolRef: pool01
+  locatorPoolRef: pool1
   rules:
   - selectors:
     - endpointSelector:
@@ -22,7 +22,7 @@ metadata:
 spec:
   vrfID: 2
   exportRouteTarget: "65002:2"
-  locatorPoolRef: pool02
+  locatorPoolRef: pool1
   rules:
   - selectors:
     - endpointSelector:

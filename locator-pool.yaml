@@ -1,9 +1,8 @@
 apiVersion: isovalent.com/v1alpha1
 kind: IsovalentSRv6LocatorPool
 metadata:
-  name: pool01
+  name: pool1
   labels:
-    # This label will be used in the next step
     export: "true"
 spec:
   behaviorType: uSID
@@ -18,9 +17,8 @@ spec:
 apiVersion: isovalent.com/v1alpha1
 kind: IsovalentSRv6LocatorPool
 metadata:
-  name: pool02
+  name: pool1
   labels:
-    # This label will be used in the next step
     export: "true"
 spec:
   behaviorType: uSID
