@@ -17,7 +17,7 @@ spec:
 apiVersion: isovalent.com/v1alpha1
 kind: IsovalentSRv6LocatorPool
 metadata:
-  name: pool1
+  name: pool2
   labels:
     export: "true"
 spec:
