@@ -1,6 +1,6 @@
 # annotation is required to configure the control-plane
 # responds to VPNv4 routes.
-kubectl annotate --overwrite nodes cilium-srv6-lab-cluster01-control-plane cilium.io/bgp-virtual-router.65001="router-id=172.100.100.2 srv6-responder=true"
+kubectl annotate --overwrite nodes cilium-srv6-lab-cluster01-control-plane cilium.io/bgp-virtual-router.65001="srv6-responder=true"
 
-kubectl annotate --overwrite nodes cilium-srv6-lab-cluster02-control-plane cilium.io/bgp-virtual-router.65002="router-id=172.200.200.2,srv6-responder=true"
+kubectl annotate --overwrite nodes cilium-srv6-lab-cluster02-control-plane cilium.io/bgp-virtual-router.65002="srv6-responder=true"
 
