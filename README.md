@@ -105,7 +105,32 @@ Add notes about how to use the system.
  835  sudo clab destroy --cleanup -t Containerlab/topology.yaml
   836  sudo clab deploy -t Containerlab/topology.yaml
 
+taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl apply -f cilium-bgp-peering-policies.yaml
+ciliumbgppeeringpolicy.cilium.io/cilium-srv6-lab-cluster01-control-plane created
+ciliumbgppeeringpolicy.cilium.io/cilium-srv6-lab-cluster02-control-plane created
+taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl apply -f locator-pool1.yaml 
+isovalentsrv6locatorpool.isovalent.com/pool1 created
+taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl apply -f vrf-policy.yaml
+isovalentvrf.isovalent.com/vrf01 created
+isovalentvrf.isovalent.com/vrf02 created
 
+
+taahoju3@containerlab01:~/cilium_srv6_lab$ kubectx kind-cilium-srv6-lab-cluster02
+✔ Switched to context "kind-cilium-srv6-lab-cluster02".
+taahoju3@containerlab01:~/cilium_srv6_lab$ 
+taahoju3@containerlab01:~/cilium_srv6_lab$ 
+taahoju3@containerlab01:~/cilium_srv6_lab$  kubectl apply -f cilium-bgp-peering-policies.yaml
+ciliumbgppeeringpolicy.cilium.io/cilium-srv6-lab-cluster01-control-plane created
+ciliumbgppeeringpolicy.cilium.io/cilium-srv6-lab-cluster02-control-plane created
+taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl apply -f locator-pool2.yaml 
+isovalentsrv6locatorpool.isovalent.com/pool2 created
+taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl apply -f vrf-policy.yaml
+isovalentvrf.isovalent.com/vrf01 created
+isovalentvrf.isovalent.com/vrf02 created
+
+#####
+NOTE: Only after splitting locator pool to two seperate files, correct advertised.
+####
   ----
   339  ip netns list
   340  docker ps
@@ -158,11 +183,25 @@ time="2024-07-25T13:29:18Z" level=info msg="Allocated SID for VRF with export ro
 
 taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl get sidmanager -o custom-columns="NAME:.metadata.name,ALLOCATIONS:.spec.locatorAllocations"
 NAME                                      ALLOCATIONS
-cilium-srv6-lab-cluster01-control-plane   [map[locators:[map[behaviorType:uSID prefix:fd00:1:0:25bc::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool01] map[locators:[map[behaviorType:uSID prefix:fd00:2:0:fbb9::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool02]]
-cilium-srv6-lab-cluster01-worker          [map[locators:[map[behaviorType:uSID prefix:fd00:1:0:8d63::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool01] map[locators:[map[behaviorType:uSID prefix:fd00:2:0:430f::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool02]]
+cilium-srv6-lab-cluster01-control-plane   [map[locators:[map[behaviorType:uSID prefix:fd00:1:0:b479::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool1]]
+cilium-srv6-lab-cluster01-worker          [map[locators:[map[behaviorType:uSID prefix:fd00:1:0:e3f9::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool1]]
 
-
+taahoju3@containerlab01:~/cilium_srv6_lab$ kubectx kind-cilium-srv6-lab-cluster02
+✔ Switched to context "kind-cilium-srv6-lab-cluster02".
 taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl get sidmanager -o custom-columns="NAME:.metadata.name,ALLOCATIONS:.spec.locatorAllocations"
 NAME                                      ALLOCATIONS
-cilium-srv6-lab-cluster02-control-plane   [map[locators:[map[behaviorType:uSID prefix:fd00:1:0:6b87::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool01] map[locators:[map[behaviorType:uSID prefix:fd00:2:0:12f6::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool02]]
-cilium-srv6-lab-cluster02-worker          [map[locators:[map[behaviorType:uSID prefix:fd00:1:0:a236::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool01] map[locators:[map[behaviorType:uSID prefix:fd00:2:0:5b2f::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool02]]
+cilium-srv6-lab-cluster02-control-plane   [map[locators:[map[behaviorType:uSID prefix:fd00:2:0:5abc::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool2]]
+cilium-srv6-lab-cluster02-worker          [map[locators:[map[behaviorType:uSID prefix:fd00:2:0:940b::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool2]]
+
+taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl get sidmanager -o custom-columns="NAME:.metadata.name,ALLOCATIONS:.status.sidAllocations"
+NAME                                      ALLOCATIONS
+cilium-srv6-lab-cluster02-control-plane   [map[poolRef:pool2 sids:[map[behavior:uDT4 behaviorType:uSID metadata:vrf02 owner:srv6-manager sid:map[addr:fd00:2:0:5abc:44ef:: structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]]]]]
+cilium-srv6-lab-cluster02-worker          [map[poolRef:pool2 sids:[map[behavior:uDT4 behaviorType:uSID metadata:vrf02 owner:srv6-manager sid:map[addr:fd00:2:0:940b:8e75:: structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]]]]]
+
+taahoju3@containerlab01:~/cilium_srv6_lab$ kubectx kind-cilium-srv6-lab-cluster01
+✔ Switched to context "kind-cilium-srv6-lab-cluster01".
+taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl get sidmanager -o custom-columns="NAME:.metadata.name,ALLOCATIONS:.status.sidAllocations"
+NAME                                      ALLOCATIONS
+cilium-srv6-lab-cluster01-control-plane   [map[poolRef:pool1 sids:[map[behavior:uDT4 behaviorType:uSID metadata:vrf01 owner:srv6-manager sid:map[addr:fd00:1:0:b479:71f4:: structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]]]]]
+cilium-srv6-lab-cluster01-worker          [map[poolRef:pool1 sids:[map[behavior:uDT4 behaviorType:uSID metadata:vrf01 owner:srv6-manager sid:map[addr:fd00:1:0:e3f9:2baf:: structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]]]]]
+taahoju3@containerlab01:~/cilium_srv6_lab$ 
