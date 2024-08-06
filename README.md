@@ -205,3 +205,20 @@ NAME                                      ALLOCATIONS
 cilium-srv6-lab-cluster01-control-plane   [map[poolRef:pool1 sids:[map[behavior:uDT4 behaviorType:uSID metadata:vrf01 owner:srv6-manager sid:map[addr:fd00:1:0:b479:71f4:: structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]]]]]
 cilium-srv6-lab-cluster01-worker          [map[poolRef:pool1 sids:[map[behavior:uDT4 behaviorType:uSID metadata:vrf01 owner:srv6-manager sid:map[addr:fd00:1:0:e3f9:2baf:: structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]]]]]
 taahoju3@containerlab01:~/cilium_srv6_lab$ 
+
+
+taahoju3@containerlab01:~$ kubectl -n kube-system get pods -l k8s-app=cilium
+NAME           READY   STATUS    RESTARTS   AGE
+cilium-462ww   1/1     Running   0          8h
+cilium-tsccc   1/1     Running   0          8h <--- Control-plane
+
+taahoju3@containerlab01:~$ kubectl -n kube-system exec cilium-tsccc -- cilium-dbg bgp peers
+Defaulted container "cilium-agent" out of: cilium-agent, config (init), mount-cgroup (init), apply-sysctl-overwrites (init), mount-bpf-fs (init), clean-cilium-state (init), install-cni-binaries (init)
+Local AS   Peer AS   Peer Address              Session       Uptime    Family          Received   Advertised
+65001      65000     fc00:0:3333::1:179        established   8h3m51s   ipv4/mpls_vpn   0          0    
+65001      65000     fd00:172:100:100::1:179   established   8h26m7s   ipv6/unicast    0   
+
+
+
+
+
