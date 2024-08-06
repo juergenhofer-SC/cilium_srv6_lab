@@ -88,22 +88,18 @@ Now that the base installation for Cilium Enterprise is complete, you can explor
 
 Add notes about how to use the system.
 
+### Debug / notepad section
+
+# delete all nodes / destroy and rebuild clab
  kind delete clusters --all
-  323  kubectx
-  324  git pull
-  325  kind create cluster --config cluster01.yaml 
-  326  helm install cilium isovalent/cilium --version 1.15.7 --namespace kube-system -f cilium-enterprise-values.yaml
-  327  kind create cluster --config cluster02.yaml 
-  328  kubectx
-  329  kubectx kind-cluster02
-  330  helm install cilium isovalent/cilium --version 1.15.7 --namespace kube-system -f cilium-enterprise-values.yaml
-  331  kubectx kind-cluster01
-  332  kubectx
+  
+ sudo clab destroy --cleanup -t Containerlab/topology.yaml
+ sudo clab deploy -t Containerlab/topology.yaml
 
-
-
- 835  sudo clab destroy --cleanup -t Containerlab/topology.yaml
-  836  sudo clab deploy -t Containerlab/topology.yaml
+# apply yamls
+####
+NOTE: Only after splitting locator pool to two seperate files, get's correct advertised.
+####
 
 taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl apply -f cilium-bgp-peering-policies.yaml
 ciliumbgppeeringpolicy.cilium.io/cilium-srv6-lab-cluster01-control-plane created
@@ -128,58 +124,33 @@ taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl apply -f vrf-policy.yaml
 isovalentvrf.isovalent.com/vrf01 created
 isovalentvrf.isovalent.com/vrf02 created
 
-#####
-NOTE: Only after splitting locator pool to two seperate files, correct advertised.
-####
-  ----
-  339  ip netns list
-  340  docker ps
-  341  docker inspect --format '{{ .State.Pid }}' <CONTAINER_ID>
-  342  docker inspect --format '{{ .State.Pid }}' caa38fbde54a
-  343  nsenter -t 12692 -n ip addr
-  344  sudo nsenter -t 12692 -n ip addr
 
+ taahoju3@containerlab01:~/cilium_srv6_lab/Containerlab$ kubectl get pods --all-namespaces
+NAMESPACE            NAME                                                              READY   STATUS    RESTARTS   AGE
+kube-system          cilium-462ww                                                      1/1     Running   0          9h
+kube-system          cilium-operator-6568655999-2zcqs                                  1/1     Running   0          9h
+kube-system          cilium-operator-6568655999-v6qh6                                  1/1     Running   0          9h
+kube-system          cilium-tsccc                                                      1/1     Running   0          9h
+kube-system          coredns-7db6d8ff4d-46q4g                                          1/1     Running   0          9h
+kube-system          coredns-7db6d8ff4d-lk62r                                          1/1     Running   0          9h
+kube-system          etcd-cilium-srv6-lab-cluster01-control-plane                      1/1     Running   0          9h
+kube-system          kube-apiserver-cilium-srv6-lab-cluster01-control-plane            1/1     Running   0          9h
+kube-system          kube-controller-manager-cilium-srv6-lab-cluster01-control-plane   1/1     Running   0          9h
+kube-system          kube-proxy-6ddbm                                                  1/1     Running   0          9h
+kube-system          kube-proxy-p9smn                                                  1/1     Running   0          9h
+kube-system          kube-scheduler-cilium-srv6-lab-cluster01-control-plane            1/1     Running   0          9h
+local-path-storage   local-path-provisioner-988d74bc-pjj7x                             1/1     Running   0          9h
 
-taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl get pods --all-namespaces
-NAMESPACE            NAME                                                              READY   STATUS    RESTARTS       AGE
-kube-system          cilium-gs6zs                                                      1/1     Running   1 (2d8h ago)   16d
-kube-system          cilium-jvl8l                                                      1/1     Running   1 (2d8h ago)   16d
-kube-system          cilium-operator-5d64f7b64d-4qmzq                                  1/1     Running   2 (2d8h ago)   16d
-kube-system          cilium-operator-5d64f7b64d-tf5xz                                  1/1     Running   2 (2d8h ago)   16d
-kube-system          coredns-7db6d8ff4d-dkkfh                                          1/1     Running   1 (2d8h ago)   16d
-kube-system          coredns-7db6d8ff4d-xjqtx                                          1/1     Running   1 (2d8h ago)   16d
-kube-system          etcd-cilium-srv6-lab-cluster01-control-plane                      1/1     Running   0              2d8h
-kube-system          kube-apiserver-cilium-srv6-lab-cluster01-control-plane            1/1     Running   0              2d8h
-kube-system          kube-controller-manager-cilium-srv6-lab-cluster01-control-plane   1/1     Running   2 (2d8h ago)   16d
-kube-system          kube-proxy-ftxv4                                                  1/1     Running   2 (2d8h ago)   16d
-kube-system          kube-proxy-phcdq                                                  1/1     Running   2 (2d8h ago)   16d
-kube-system          kube-scheduler-cilium-srv6-lab-cluster01-control-plane            1/1     Running   2 (2d8h ago)   16d
-local-path-storage   local-path-provisioner-988d74bc-lkh9n                             1/1     Running   1 (2d8h ago)   16d
-
-taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl -n kube-system logs cilium-gs6zs | grep "Allocated SID"
+taahoju3@containerlab01:~/cilium_srv6_lab/Containerlab$ kubectl -n kube-system logs cilium-462ww | grep "Allocated SID"
 Defaulted container "cilium-agent" out of: cilium-agent, config (init), mount-cgroup (init), apply-sysctl-overwrites (init), mount-bpf-fs (init), clean-cilium-state (init), install-cni-binaries (init)
-time="2024-07-25T08:54:17Z" level=info msg="Allocated SID for VRF with export route target." ExportRouteTarget="65001:1" LocatorPool= SID="2001:dead:10:1::adee" VRF=vrf01 component=srv6.Manager.createIngressPathVRFs subsys=srv6-manager
-
-
-taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl get pods --all-namespaces
-NAMESPACE            NAME                                                              READY   STATUS    RESTARTS        AGE
-kube-system          cilium-gpq6r                                                      1/1     Running   1 (2d9h ago)    16d
-kube-system          cilium-jrcsv                                                      1/1     Running   1 (2d9h ago)    16d
-kube-system          cilium-operator-5d64f7b64d-9nvz4                                  1/1     Running   2 (2d9h ago)    16d
-kube-system          cilium-operator-5d64f7b64d-crmlv                                  1/1     Running   32 (2d9h ago)   16d
-kube-system          coredns-7db6d8ff4d-89xpw                                          1/1     Running   1 (2d9h ago)    16d
-kube-system          coredns-7db6d8ff4d-dswbm                                          1/1     Running   1 (2d9h ago)    16d
-kube-system          etcd-cilium-srv6-lab-cluster02-control-plane                      1/1     Running   0               2d9h
-kube-system          kube-apiserver-cilium-srv6-lab-cluster02-control-plane            1/1     Running   0               2d9h
-kube-system          kube-controller-manager-cilium-srv6-lab-cluster02-control-plane   1/1     Running   2 (2d9h ago)    16d
-kube-system          kube-proxy-5sgkn                                                  1/1     Running   2 (2d9h ago)    16d
-kube-system          kube-proxy-cg9m4                                                  1/1     Running   27 (2d9h ago)   16d
-kube-system          kube-scheduler-cilium-srv6-lab-cluster02-control-plane            1/1     Running   2 (2d9h ago)    16d
-local-path-storage   local-path-provisioner-988d74bc-tlvct                             1/1     Running   1 (2d9h ago)    16d
-
-time="2024-07-25T13:29:18Z" level=info msg="Allocated SID for VRF with export route target." ExportRouteTarget="65002:2" LocatorPool= SID="2001:db8:20::d80" VRF=vrf02 component=srv6.Manager.createIngressPathVRFs subsys=srv6-manager
-
-
+time="2024-08-05T21:21:09Z" level=info msg="Allocated SID for VRF with export route target." ExportRouteTarget="65001:1" LocatorPool=pool1 SID="fd00:1:0:e3f9:2baf::" VRF=vrf01 component=srv6.Manager.createIngressPathVRFs subsys=srv6-manager
+taahoju3@containerlab01:~/cilium_srv6_lab/Containerlab$ 
+taahoju3@containerlab01:~/cilium_srv6_lab/Containerlab$ 
+taahoju3@containerlab01:~/cilium_srv6_lab/Containerlab$ 
+taahoju3@containerlab01:~/cilium_srv6_lab/Containerlab$ kubectl -n kube-system logs cilium-tsccc | grep "Allocated SID"
+Defaulted container "cilium-agent" out of: cilium-agent, config (init), mount-cgroup (init), apply-sysctl-overwrites (init), mount-bpf-fs (init), clean-cilium-state (init), install-cni-binaries (init)
+time="2024-08-05T21:21:09Z" level=info msg="Allocated SID for VRF with export route target." ExportRouteTarget="65001:1" LocatorPool=pool1 SID="fd00:1:0:b479:71f4::" VRF=vrf01 component=srv6.Manager.createIngressPathVRFs subsys=srv6-manager
+taahoju3@containerlab01:~/cilium_srv6_lab/Containerlab$ 
 
 taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl get sidmanager -o custom-columns="NAME:.metadata.name,ALLOCATIONS:.spec.locatorAllocations"
 NAME                                      ALLOCATIONS
