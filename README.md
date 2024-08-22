@@ -77,7 +77,8 @@ kubernetes-cluster02
      This file keep track of your Cilium Enterprise configuration!
  3. Run helm install command to deploy Cilium Enterprise CNI
      helm install cilium isovalent/cilium --version 1.15.7 \
-     --namespace kube-system -f cilium-enterprise-values.yaml
+     --namespace kube-system \
+	 -f cilium-enterprise-values.yaml
 
 Now that the base installation for Cilium Enterprise is complete, you can explore and enable advanced features, like SRv6.
 
