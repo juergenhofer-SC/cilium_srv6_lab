@@ -4,8 +4,6 @@ hubble:
     enabled: false
 ipv6:
   enabled: true
-enableIPv6Masquerade:
-  enabled: false
 enterprise:
   srv6:
     enabled: true
