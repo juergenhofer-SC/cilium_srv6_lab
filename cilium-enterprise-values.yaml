@@ -7,7 +7,7 @@ ipv6:
 enterprise:
   srv6:
     enabled: true
-    encapMode: srh
+    encapMode: reduced
 bgpControlPlane:
   enabled: true
 k8s:
