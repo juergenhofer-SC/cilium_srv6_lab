@@ -9,6 +9,7 @@ spec:
       kubernetes.io/hostname: "cilium-srv6-lab-cluster01-control-plane"
   virtualRouters:
     - localASN: 65000
+      mapSRv6VRFs: true
       srv6LocatorPoolSelector:
         matchLabels:
           export: "true"
@@ -37,6 +38,7 @@ spec:
       kubernetes.io/hostname: "cilium-srv6-lab-cluster02-control-plane"
   virtualRouters:
     - localASN: 65000
+      mapSRv6VRFs: true
       srv6LocatorPoolSelector:
         matchLabels:
           export: "true"
