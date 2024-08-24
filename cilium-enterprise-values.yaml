@@ -7,7 +7,6 @@ ipv6:
 enterprise:
   srv6:
     enabled: true
-    locatorPoolEnabled: true
     encapMode: srh
 bgpControlPlane:
   enabled: true
