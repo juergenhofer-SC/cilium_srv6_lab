@@ -126,7 +126,7 @@ Run 'containerlab version upgrade' to upgrade or go check other installation opt
 
 **Cilium SRv6 L3VPN**
 
-# apply yamls per Cluster
+# Apply Config parameter yamls per Cluster
 ####
 NOTE: Only after splitting locator pool to two seperate files, get's correct advertised.
 ####
