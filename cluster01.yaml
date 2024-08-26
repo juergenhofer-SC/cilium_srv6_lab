@@ -10,22 +10,20 @@ networking:
 nodes:
 - role: control-plane
   image: nicolaka/netshoot:latest
-  labels:
-    vrf: vrf01
   kubeadmConfigPatches:
   - |
     kind: InitConfiguration
     nodeRegistration:
       kubeletExtraArgs:
         node-ip: "172.100.100.2,fd00:172:100:100::2"
+        node-labels: "vrf=vrf01"
 #BGP local peer address
 - role: worker
   image: nicolaka/netshoot:latest
-  labels:
-    vrf: vrf01
   kubeadmConfigPatches:
   - |
     kind: InitConfiguration
     nodeRegistration:
       kubeletExtraArgs:
         node-ip: "10.1.1.1,2001:dead:10:1:1::1"
+        node-labels: "vrf=vrf01"
