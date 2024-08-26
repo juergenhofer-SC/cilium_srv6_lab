@@ -17,3 +17,9 @@ nodes:
         node-ip: "172.100.100.2,fd00:172:100:100::2"
 #BGP local peer address
 - role: worker
+  kubeadmConfigPatches:
+  - |
+    kind: InitConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-ip: "10.1.1.1,2001:dead:10:1:1::1"
