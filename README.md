@@ -61,27 +61,6 @@ These instructions will get you a copy of the project up and running on your loc
 kubernetes-cluster01
 kubernetes-cluster02
 
-**Create K8s cluster with kind**
-
- 1. kind create cluster --config cluster01.yaml 
-     Set kubectl context to "kind-kubernetes-cluster01" You can now use your cluster with: 
-     kubectl cluster-info --context kind-kubernetes-cluster01
-
- 2. kind create cluster --config cluster02.yaml
-
-**Install Cilium CNI**
-  (ref: https://docs.isovalent.com/operations-guide/installation/clean-install.html)
- 
- 1. helm repo add isovalent https://helm.isovalent.com
- 2. Create a cilium-enterprise-values.yaml
-     This file keep track of your Cilium Enterprise configuration!
- 3. Run helm install command to deploy Cilium Enterprise CNI
-     helm install cilium isovalent/cilium --version 1.15.7 \
-     --namespace kube-system \
-	 -f cilium-enterprise-values.yaml
-
-Now that the base installation for Cilium Enterprise is complete, you can explore and enable advanced features, like SRv6.
-
 **Install Containerlab Environment**
  sudo clab deploy -t Containerlab/topology.yaml
 
@@ -123,6 +102,21 @@ Run 'containerlab version upgrade' to upgrade or go check other installation opt
 | 6 | clab-cilium-srv6-lab-pe2                | 04f1022819b9 | nso-docker-local.artifactory.swisscom.com/nso/ios-xr/xrd-control-plane:7.10.2                | cisco_xrd     | running | 172.20.20.37/24 | 2001:172:20:20::3/64     |
 | 7 | clab-cilium-srv6-lab-rr                 | b7df49b3dd0f | nso-docker-local.artifactory.swisscom.com/nso/ios-xr/xrd-control-plane:7.10.2                | cisco_xrd     | running | 172.20.20.46/24 | 2001:172:20:20::2/64     |
 +---+-----------------------------------------+--------------+----------------------------------------------------------------------------------------------+---------------+---------+-----------------+--------------------------+
+
+**Install Cilium CNI**
+NOTE: it is important that the CNI isntall is done after clab config!
+
+  (ref: https://docs.isovalent.com/operations-guide/installation/clean-install.html)
+ 
+ 1. helm repo add isovalent https://helm.isovalent.com
+ 2. Create a cilium-enterprise-values.yaml
+     This file keep track of your Cilium Enterprise configuration!
+ 3. Run helm install command to deploy Cilium Enterprise CNI
+     helm install cilium isovalent/cilium --version 1.15.7 \
+     --namespace kube-system \
+	 -f cilium-enterprise-values.yaml
+
+Now that the base installation for Cilium Enterprise is complete, you can explore and enable advanced features, like SRv6.
 
 **Cilium SRv6 L3VPN**
 
