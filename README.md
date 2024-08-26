@@ -46,6 +46,8 @@ These instructions will get you a copy of the project up and running on your loc
      	- docker login $local.artifactory
 	- docker pull $local.artifactory/nso/ios-xr/xrd-control-plane:7.10.2
 
+### Installing
+
 **Create K8s cluster with kind**
 1.  kind create cluster --config cluster01.yaml
    	Set kubectl context to "kind-kubernetes-cluster01"
@@ -58,8 +60,6 @@ These instructions will get you a copy of the project up and running on your loc
 4.  taahoju3@containerlab01:~/cilium_srv6_lab$ kind get clusters
 kubernetes-cluster01
 kubernetes-cluster02
-
-### Installing
 
 **Create K8s cluster with kind**
 
@@ -82,22 +82,51 @@ kubernetes-cluster02
 
 Now that the base installation for Cilium Enterprise is complete, you can explore and enable advanced features, like SRv6.
 
-**Cilium SRv6 L3VPN**
-
-
-## Usage <a name = "usage"></a>
-
-Add notes about how to use the system.
-
-### Debug / notepad section
-
-# delete all nodes / destroy and rebuild clab
- kind delete clusters --all
-  
- sudo clab destroy --cleanup -t Containerlab/topology.yaml
+**Install Containerlab Environment**
  sudo clab deploy -t Containerlab/topology.yaml
 
-# apply yamls
+Install Output:
+INFO[0000] Containerlab v0.56.0 started                 
+INFO[0000] Parsing & checking topology file: topology.yaml 
+INFO[0000] Creating docker network: Name="clab", IPv4Subnet="172.20.20.0/24", IPv6Subnet="2001:172:20:20::/64", MTU=1500 
+INFO[0000] Creating lab directory: /home/taahoju3/cilium_srv6_lab/clab-cilium-srv6-lab 
+INFO[0001] Creating container: "pe1"                    
+INFO[0001] Creating container: "pe2"                    
+INFO[0001] Creating container: "rr"                     
+INFO[0002] Created link: pe1:Gi0-0-0-0 <--> pe2:Gi0-0-0-0 
+INFO[0002] Created link: pe2:Gi0-0-0-1 <--> rr:Gi0-0-0-1 
+INFO[0002] Created link: pe1:Gi0-0-0-1 <--> rr:Gi0-0-0-0 
+INFO[0005] Created link: cilium-srv6-lab-cluster01-control-plane:net0 <--> pe1:Gi0-0-0-2 
+INFO[0005] Created link: cilium-srv6-lab-cluster02-control-plane:net0 <--> pe2:Gi0-0-0-2 
+INFO[0005] Executed command "ip addr add 172.200.200.2/24 dev net0" on the node "cilium-srv6-lab-cluster02-control-plane". stdout: 
+INFO[0005] Executed command "ip addr add fd00:172:200:200::2/64 dev net0" on the node "cilium-srv6-lab-cluster02-control-plane". stdout: 
+INFO[0005] Executed command "ip route add 10.0.0.0/8 via 172.200.200.1 dev net0" on the node "cilium-srv6-lab-cluster02-control-plane". stdout: 
+INFO[0005] Executed command "ip route add fd00::/16 via fd00:172:200:200::1 dev net0" on the node "cilium-srv6-lab-cluster02-control-plane". stdout: 
+INFO[0005] Executed command "ip route add fc00:0:3333::1/128 via fd00:172:200:200::1 dev net0" on the node "cilium-srv6-lab-cluster02-control-plane". stdout: 
+INFO[0005] Executed command "ip addr add 172.100.100.2/24 dev net0" on the node "cilium-srv6-lab-cluster01-control-plane". stdout: 
+INFO[0005] Executed command "ip addr add fd00:172:100:100::2/64 dev net0" on the node "cilium-srv6-lab-cluster01-control-plane". stdout: 
+INFO[0005] Executed command "ip route add 10.0.0.0/8 via 172.100.100.1 dev net0" on the node "cilium-srv6-lab-cluster01-control-plane". stdout: 
+INFO[0005] Executed command "ip route add fd00::/16 via fd00:172:100:100::1 dev net0" on the node "cilium-srv6-lab-cluster01-control-plane". stdout: 
+INFO[0005] Executed command "ip route add fc00:0:3333::1/128 via fd00:172:100:100::1 dev net0" on the node "cilium-srv6-lab-cluster01-control-plane". stdout: 
+INFO[0005] Adding containerlab host entries to /etc/hosts file 
+INFO[0005] Adding ssh config for containerlab nodes     
+INFO[0005] 🎉 New containerlab version 0.57.0 is available! Release notes: https://containerlab.dev/rn/0.57/
+Run 'containerlab version upgrade' to upgrade or go check other installation options at https://containerlab.dev/install/ 
++---+-----------------------------------------+--------------+----------------------------------------------------------------------------------------------+---------------+---------+-----------------+--------------------------+
+| # |                  Name                   | Container ID |                                            Image                                             |     Kind      |  State  |  IPv4 Address   |       IPv6 Address       |
++---+-----------------------------------------+--------------+----------------------------------------------------------------------------------------------+---------------+---------+-----------------+--------------------------+
+| 1 | cilium-srv6-lab-cluster01-control-plane | c5fada159da2 | kindest/node:v1.30.0@sha256:047357ac0cfea04663786a612ba1eaba9702bef25227a794b52890dd8bcd692e | ext-container | running | 172.18.0.2/16   | fc00:f853:ccd:e793::2/64 |
+| 2 | cilium-srv6-lab-cluster01-worker        | d4222b3e8fe9 | kindest/node:v1.30.0@sha256:047357ac0cfea04663786a612ba1eaba9702bef25227a794b52890dd8bcd692e | ext-container | running | 172.18.0.3/16   | fc00:f853:ccd:e793::3/64 |
+| 3 | cilium-srv6-lab-cluster02-control-plane | 62dbdd8e7848 | kindest/node:v1.30.0@sha256:047357ac0cfea04663786a612ba1eaba9702bef25227a794b52890dd8bcd692e | ext-container | running | 172.18.0.4/16   | fc00:f853:ccd:e793::4/64 |
+| 4 | cilium-srv6-lab-cluster02-worker        | 93f74dc49be7 | kindest/node:v1.30.0@sha256:047357ac0cfea04663786a612ba1eaba9702bef25227a794b52890dd8bcd692e | ext-container | running | 172.18.0.5/16   | fc00:f853:ccd:e793::5/64 |
+| 5 | clab-cilium-srv6-lab-pe1                | 9dedea52a10c | nso-docker-local.artifactory.swisscom.com/nso/ios-xr/xrd-control-plane:7.10.2                | cisco_xrd     | running | 172.20.20.36/24 | 2001:172:20:20::4/64     |
+| 6 | clab-cilium-srv6-lab-pe2                | 04f1022819b9 | nso-docker-local.artifactory.swisscom.com/nso/ios-xr/xrd-control-plane:7.10.2                | cisco_xrd     | running | 172.20.20.37/24 | 2001:172:20:20::3/64     |
+| 7 | clab-cilium-srv6-lab-rr                 | b7df49b3dd0f | nso-docker-local.artifactory.swisscom.com/nso/ios-xr/xrd-control-plane:7.10.2                | cisco_xrd     | running | 172.20.20.46/24 | 2001:172:20:20::2/64     |
++---+-----------------------------------------+--------------+----------------------------------------------------------------------------------------------+---------------+---------+-----------------+--------------------------+
+
+**Cilium SRv6 L3VPN**
+
+# apply yamls per Cluster
 ####
 NOTE: Only after splitting locator pool to two seperate files, get's correct advertised.
 ####
@@ -124,6 +153,18 @@ isovalentsrv6locatorpool.isovalent.com/pool2 created
 taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl apply -f vrf-policy.yaml
 isovalentvrf.isovalent.com/vrf01 created
 isovalentvrf.isovalent.com/vrf02 created
+
+## Usage <a name = "usage"></a>
+
+Add notes about how to use the system.
+
+### Debug / notepad section
+
+# delete all nodes / destroy and rebuild clab
+ kind delete clusters --all
+  
+ sudo clab destroy --cleanup -t Containerlab/topology.yaml
+ sudo clab deploy -t Containerlab/topology.yaml
 
 
  taahoju3@containerlab01:~/cilium_srv6_lab/Containerlab$ kubectl get pods --all-namespaces
