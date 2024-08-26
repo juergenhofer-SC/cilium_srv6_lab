@@ -58,7 +58,7 @@ topology:
 
     cilium-srv6-lab-cluster01-worker:
       kind: ext-container
-      image: nicolaka/netshoot:latest
+      image: wbitt/network-multitool
      
 
 # Note: BGP local peer is from control-plane only
@@ -68,7 +68,7 @@ topology:
       kind: ext-container
       image: nicolaka/netshoot:latest
       labels:
-        vrf: vrf02
+        vrf: vrf01
       exec:
       - ip addr add 172.200.200.2/24 dev net0
       - ip addr add fd00:172:200:200::2/64 dev net0
@@ -80,7 +80,7 @@ topology:
 
     cilium-srv6-lab-cluster02-worker:
       kind: ext-container
-      image: nicolaka/netshoot:latest
+      image: wbitt/network-multitool
 
   links:
     - endpoints: ["pe1:Gi0-0-0-0", "pe2:Gi0-0-0-0"]
