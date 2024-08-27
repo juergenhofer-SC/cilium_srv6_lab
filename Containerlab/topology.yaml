@@ -42,9 +42,10 @@ topology:
 # Note: BGP local peer is from control-plane only
 # node-ip: "172.100.100.2,fd00:172:100:100::2"
 #
-    cilium-srv6-lab-cluster01-control-plane:
-      kind: ext-container
+    cilium01_router:
+      kind: linux
       image: nicolaka/netshoot:latest
+      network-mode: container:cilium-srv6-lab-cluster01-control-plane
       labels:
         vrf: vrf01
       exec:
@@ -56,16 +57,22 @@ topology:
       # static route for route reflector
       - ip route add fc00:0:3333::1/128 via fd00:172:100:100::1 dev net0
 
-    cilium-srv6-lab-cluster01-worker:
-      kind: ext-container
+    cilium01_worker:
+      kind: linux
       image: wbitt/network-multitool
+      network-mode: container:cilium-srv6-lab-cluster01-worker
+      labels:
+        vrf: vrf01
+      exec:
+      - ip addr add 10.1.1.1/24 dev net0
      
 
 # Note: BGP local peer is from control-plane only
 # node-ip: "172.200.200.2,fd00:172:200:200::2"
 #
-    cilium-srv6-lab-cluster02-control-plane:
-      kind: ext-container
+    cilium02_router:
+      kind: linux
+      network-mode: container:cilium-srv6-lab-cluster02-control-plane
       image: nicolaka/netshoot:latest
       labels:
         vrf: vrf01
@@ -78,13 +85,18 @@ topology:
       # static route for route reflector
       - ip route add fc00:0:3333::1/128 via fd00:172:200:200::1 dev net0
 
-    cilium-srv6-lab-cluster02-worker:
-      kind: ext-container
+    cilium02_worker:
+      kind: linux
       image: wbitt/network-multitool
+      network-mode: container:cilium-srv6-lab-cluster02-worker
+      labels:
+        vrf: vrf01
+      exec:
+      - ip addr add 10.2.2.2/24 dev net0
 
   links:
     - endpoints: ["pe1:Gi0-0-0-0", "pe2:Gi0-0-0-0"]
     - endpoints: ["pe1:Gi0-0-0-1", "rr:Gi0-0-0-0"]
     - endpoints: ["pe2:Gi0-0-0-1", "rr:Gi0-0-0-1"]
-    - endpoints: ["cilium-srv6-lab-cluster01-control-plane:net0", "pe1:Gi0-0-0-2"]
-    - endpoints: ["cilium-srv6-lab-cluster02-control-plane:net0", "pe2:Gi0-0-0-2"]
+    - endpoints: ["cilium01_router:net0", "pe1:Gi0-0-0-2"]
+    - endpoints: ["cilium02_router:net0", "pe2:Gi0-0-0-2"]
