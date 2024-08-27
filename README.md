@@ -230,7 +230,7 @@ Local AS   Peer AS   Peer Address              Session       Uptime    Family   
 taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl run multitool01 --namespace=kube-system --image=wbitt/network-multitool
 
 
-taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl -n kube-systme exec --stdin --tty multitool01 -- /bin/bash
+taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl -n kube-system exec --stdin --tty multitool01 -- /bin/bash
 
 
 kubectl --namespace=kube-system delete pod/multitool01
