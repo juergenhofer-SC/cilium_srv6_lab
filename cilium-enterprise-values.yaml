@@ -1,5 +1,5 @@
 hubble:
-  enabled: false
+  enabled: true
   relay:
     enabled: false
 ipv6:
