@@ -2,6 +2,8 @@ hubble:
   enabled: true
   relay:
     enabled: false
+debug:
+  enabled: true
 ipv6:
   enabled: true
 enterprise:
