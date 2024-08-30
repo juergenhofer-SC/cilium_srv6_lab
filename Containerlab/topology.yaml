@@ -45,7 +45,8 @@ topology:
     crouter01:
       kind: linux
       image: nicolaka/netshoot:latest
-      network-mode: container:cilium-srv6-lab-cluster01-control-plane
+    cilium-srv6-lab-cluster01-control-plane:
+      kind: ext-container
       labels:
         vrf: vrf01
       exec:
@@ -68,7 +69,8 @@ topology:
     crouter02:
       kind: linux
       image: nicolaka/netshoot:latest
-      network-mode: container:cilium-srv6-lab-cluster02-control-plane
+    cilium-srv6-lab-cluster02-control-plane:
+      network-mode: ext-container
       labels:
         vrf: vrf01
       exec:
@@ -88,5 +90,5 @@ topology:
     - endpoints: ["pe1:Gi0-0-0-0", "pe2:Gi0-0-0-0"]
     - endpoints: ["pe1:Gi0-0-0-1", "rr:Gi0-0-0-0"]
     - endpoints: ["pe2:Gi0-0-0-1", "rr:Gi0-0-0-1"]
-    - endpoints: ["crouter01:net0", "pe1:Gi0-0-0-2"]
-    - endpoints: ["crouter02:net0", "pe2:Gi0-0-0-2"]
+    - endpoints: ["cilium-srv6-lab-cluster01-control-plane:net0", "pe1:Gi0-0-0-2"]
+    - endpoints: ["cilium-srv6-lab-cluster02-control-plane:net0", "pe2:Gi0-0-0-2"]
