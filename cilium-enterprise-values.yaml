@@ -18,4 +18,4 @@ ipam:
   mode: kubernetes
 tunnel: disabled
 ipv4NativeRoutingCIDR: 10.0.0.0/8
-ipv6NativeRoutingCIDR: fd00::/16
+ipv6NativeRoutingCIDR: 2001::/16
