@@ -42,9 +42,10 @@ topology:
 # Note: BGP local peer is from control-plane only
 # node-ip: "172.100.100.2,fd00:172:100:100::2"
 #
-    cilium-srv6-lab-cluster01-control-plane:
-      kind: ext-container
+    crouter01:
+      kind: linux
       image: nicolaka/netshoot:latest
+      network-mode: container:cilium-srv6-lab-cluster01-control-plane
       labels:
         vrf: vrf01
       exec:
@@ -64,9 +65,10 @@ topology:
 # Note: BGP local peer is from control-plane only
 # node-ip: "172.200.200.2,fd00:172:200:200::2"
 #
-    cilium-srv6-lab-cluster02-control-plane:
-      kind: ext-container
+    crouter02:
+      kind: linux
       image: nicolaka/netshoot:latest
+      network-mode: container:cilium-srv6-lab-cluster02-control-plane
       labels:
         vrf: vrf01
       exec:
@@ -86,5 +88,5 @@ topology:
     - endpoints: ["pe1:Gi0-0-0-0", "pe2:Gi0-0-0-0"]
     - endpoints: ["pe1:Gi0-0-0-1", "rr:Gi0-0-0-0"]
     - endpoints: ["pe2:Gi0-0-0-1", "rr:Gi0-0-0-1"]
-    - endpoints: ["cilium-srv6-lab-cluster01-control-plane:net0", "pe1:Gi0-0-0-2"]
-    - endpoints: ["cilium-srv6-lab-cluster02-control-plane:net0", "pe2:Gi0-0-0-2"]
+    - endpoints: ["crouter01:net0", "pe1:Gi0-0-0-2"]
+    - endpoints: ["crouter02:net0", "pe2:Gi0-0-0-2"]
