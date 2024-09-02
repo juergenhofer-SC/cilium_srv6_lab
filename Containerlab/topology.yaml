@@ -64,7 +64,7 @@ topology:
 # node-ip: "172.200.200.2,fd00:172:200:200::2"
 #
     cilium-srv6-lab-cluster02-control-plane:
-      network-mode: ext-container
+      kind: ext-container
       labels:
         vrf: vrf01
       exec:
