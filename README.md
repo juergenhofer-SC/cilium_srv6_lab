@@ -104,7 +104,7 @@ Run 'containerlab version upgrade' to upgrade or go check other installation opt
 +---+-----------------------------------------+--------------+----------------------------------------------------------------------------------------------+---------------+---------+-----------------+--------------------------+
 
 **Install Cilium CNI**
-NOTE: it is important that the CNI isntall is done after clab config!
+NOTE: it is important that the CNI install is done after clab config!
 
   (ref: https://docs.isovalent.com/operations-guide/installation/clean-install.html)
  
