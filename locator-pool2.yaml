@@ -12,4 +12,8 @@ spec:
     locatorBlockLenBits: 32
     locatorNodeLenBits: 16
     functionLenBits: 16
+<<<<<<< HEAD
     argumentLenBits: 0
+=======
+    argumentLenBits: 0
+>>>>>>> 5969234290dba8921d19dd707f4a92deb8a4867b
