@@ -45,20 +45,12 @@ topology:
     cilium-srv6-lab-cluster01-control-plane:
       kind: ext-container
       exec:
+      - ip addr add 172.100.100.2/24 dev net0
       - ip addr add fd00:172:100:100::2/64 dev net0
       # These static routes are needed because Cilium cannot import routes currently.
       - ip route add 2001::/16 via fd00:172:100:100::1 dev net0
       # static route for route reflector
       - ip route add fc00:0:3333::1/128 via fd00:172:100:100::1 dev net0
-
-    cilium-srv6-lab-cluster01-worker:
-      kind: linux
-      image: nicolaka/netshoot:latest
-      network-mode: container:worker
-      labels:
-        vrf: vrf01
-      exec:
-      - ip addr add 10.1.1.1/24 dev net0
 
 # Note: BGP local peer is from control-plane only
 # peer-ip: "fd00:172:200:200::2"
@@ -66,20 +58,13 @@ topology:
     cilium-srv6-lab-cluster02-control-plane:
       kind: ext-container
       exec:
+      - ip addr add 172.200.200.2/24 dev net0 
       - ip addr add fd00:172:200:200::2/64 dev net0
       # These static routes are needed because Cilium cannot import routes currently.
       - ip route add 2001::/16 via fd00:172:200:200::1 dev net0
       # static route for route reflector
       - ip route add fc00:0:3333::1/128 via fd00:172:200:200::1 dev net0
 
-    cilium-srv6-lab-cluster02-worker:
-      kind: linux
-      image: nicolaka/netshoot:latest
-      network-mode: container:worker
-      labels:
-        vrf: vrf01
-      exec:
-      - ip addr add 10.2.2.1/24 dev net0
 
   links:
     - endpoints: ["pe1:Gi0-0-0-0", "pe2:Gi0-0-0-0"]
