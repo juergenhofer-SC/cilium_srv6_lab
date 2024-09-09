@@ -7,6 +7,8 @@ networking:
   disableDefaultCNI: true 
   podSubnet: 10.1.0.0/16,2001:dead:10:0::/63
   serviceSubnet: 10.111.0.0/16,2001:beaf:1::/108
+  apiServerAddress: "0.0.0.0"
+  apiServerPort: 6443
 nodes:
 - role: control-plane
   kubeadmConfigPatches:
@@ -15,3 +17,19 @@ nodes:
     nodeRegistration:
       kubeletExtraArgs:
         node-ip: "172.100.100.2,fd00:172:100:100::2"
+
+- role: worker01
+  kubeadmConfigPatches:
+  - |
+    kind: JoinConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-ip: 10.1.0.111
+
+- role: worker02
+  kubeadmConfigPatches:
+  - |
+    kind: JoinConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-ip: 10.1.0.222
