@@ -18,18 +18,20 @@ nodes:
       kubeletExtraArgs:
         node-ip: "172.200.200.2,fd00:172:200:200::2"
 
-- role: worker01
+- role: worker
   kubeadmConfigPatches:
   - |
     kind: JoinConfiguration
     nodeRegistration:
       kubeletExtraArgs:
         node-ip: 10.2.0.111
+        node-labels: worker01
           
-- role: worker02
+- role: worker
   kubeadmConfigPatches:
   - |
     kind: JoinConfiguration
     nodeRegistration:
       kubeletExtraArgs:
         node-ip: 10.2.0.222
+        node-labels: worker02
