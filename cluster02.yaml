@@ -8,7 +8,7 @@ networking:
   podSubnet: 10.2.0.0/16,2001:dead:20:0::/63
   serviceSubnet: 10.222.0.0/16,2001:beaf:2::/108
   apiServerAddress: "0.0.0.0"
-  apiServerPort: 6443 
+  apiServerPort: 5443 
 nodes:
 - role: control-plane
   kubeadmConfigPatches:
