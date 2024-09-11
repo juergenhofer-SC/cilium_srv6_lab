@@ -1,3 +1,4 @@
+# Containerlab Config File
 name: cilium-srv6-lab
 
 topology:
@@ -6,13 +7,7 @@ topology:
       #startup-config: xrd.cfg
       # image: ios-xr/xrd-control-plane:24.1.1
       image: nso-docker-local.artifactory.swisscom.com/nso/ios-xr/xrd-control-plane:7.10.2
-
-    # linux:
-    #   image: ubuntu:latest
-    #   binds:
-    #     - /home/docker/pkt_gen:/pkt_gen
-    #     - provision_linux.sh:/provision_linux.sh
-
+   
   nodes:
     pe1:
       kind: cisco_xrd

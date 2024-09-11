@@ -1,3 +1,4 @@
+# Cilium enterprise values
 hubble:
   enabled: true
   relay:
