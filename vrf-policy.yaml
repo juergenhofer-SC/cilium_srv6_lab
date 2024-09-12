@@ -16,20 +16,3 @@ spec:
           vrf: vrf01
     destinationCIDRs:
     - 0.0.0.0/0
----
-apiVersion: isovalent.com/v1alpha1
-kind: IsovalentVRF
-metadata:
-  name: vrf02
-spec:
-  vrfID: 2
-  exportRouteTarget: "65000:1"
-  importRouteTarget: "65000:1"
-  locatorPoolRef: pool2
-  rules:
-  - selectors:
-    - endpointSelector:
-        matchLabels:
-          vrf: vrf02
-    destinationCIDRs:
-    - 0.0.0.0/0
