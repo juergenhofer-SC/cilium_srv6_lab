@@ -1,3 +1,4 @@
+# Netshoot deamon-set
 ---
 apiVersion: apps/v1
 kind: DaemonSet
