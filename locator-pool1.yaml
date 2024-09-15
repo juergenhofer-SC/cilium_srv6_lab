@@ -7,8 +7,8 @@ metadata:
     export: "true"
 spec:
   behaviorType: uSID
-  prefix: fd00:1::/48
-  locatorLenBits: 64
+  prefix: fd00:1::/40
+  locatorLenBits: 48
   structure:
     locatorBlockLenBits: 32
     locatorNodeLenBits: 16
