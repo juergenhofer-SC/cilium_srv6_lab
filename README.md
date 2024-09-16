@@ -131,7 +131,7 @@ ciliumbgppeeringpolicy.cilium.io/cilium-srv6-lab-cluster01-control-plane created
 ciliumbgppeeringpolicy.cilium.io/cilium-srv6-lab-cluster02-control-plane created
 taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl apply -f locator-pool1.yaml 
 isovalentsrv6locatorpool.isovalent.com/pool1 created
-taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl apply -f vrf-policy.yaml
+taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl apply -f vrf-policy-cluster1.yaml
 isovalentvrf.isovalent.com/vrf01 created
 isovalentvrf.isovalent.com/vrf02 created
 
@@ -145,15 +145,13 @@ ciliumbgppeeringpolicy.cilium.io/cilium-srv6-lab-cluster01-control-plane created
 ciliumbgppeeringpolicy.cilium.io/cilium-srv6-lab-cluster02-control-plane created
 taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl apply -f locator-pool2.yaml 
 isovalentsrv6locatorpool.isovalent.com/pool2 created
-taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl apply -f vrf-policy.yaml
+taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl apply -f vrf-policy-cluster2.yaml
 isovalentvrf.isovalent.com/vrf01 created
-isovalentvrf.isovalent.com/vrf02 created
 
-## Usage <a name = "usage"></a>
+## Usage <a name = "Debug"></a>
 
-Add notes about how to use the system.
 
-### Debug / notepad section
+! [Debug]  ### Debug / notepad section
 
 # delete all nodes / destroy and rebuild clab
  kind delete clusters --all
@@ -225,18 +223,6 @@ Defaulted container "cilium-agent" out of: cilium-agent, config (init), mount-cg
 Local AS   Peer AS   Peer Address              Session       Uptime    Family          Received   Advertised
 65001      65000     fc00:0:3333::1:179        established   8h3m51s   ipv4/mpls_vpn   0          0    
 65001      65000     fd00:172:100:100::1:179   established   8h26m7s   ipv6/unicast    0   
-
-
-***Multittol debug pod / worker***
-taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl run multitool01 --namespace=kube-system --image=wbitt/network-multitool
-
-
-taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl -n kube-system exec --stdin --tty multitool01 -- /bin/bash
-
-
-kubectl --namespace=kube-system delete pod/multitool01
-
-
 
 
 
