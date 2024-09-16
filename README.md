@@ -14,7 +14,7 @@ Building a lab environment with two Kubernetes cluster, interconnected via SRv6.
 
 ## High Level Overview <a name = "HLD"></a>
 
-![Hig Level Overview](https://github.com/juergenhofer-SC/cilium_srv6_lab/blob/main/K8s_SRv6_LAB_HLD.png)
+![Hig Level Overview](https://github.com/juergenhofer-SC/cilium_srv6_lab/blob/SRv6_base_config/K8s_SRv6_LAB_detail.png)
 
 ## Getting Started <a name = "getting_started"></a>
 
