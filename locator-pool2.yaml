@@ -1,3 +1,4 @@
+# Locatro Pool 2
 apiVersion: isovalent.com/v1alpha1
 kind: IsovalentSRv6LocatorPool
 metadata:

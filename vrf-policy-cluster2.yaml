@@ -1,0 +1,18 @@
+# VRF policy
+---
+apiVersion: isovalent.com/v1alpha1
+kind: IsovalentVRF
+metadata:
+  name: vrf01
+spec:
+  vrfID: 1
+  exportRouteTarget: "65000:1"
+  importRouteTarget: "65000:1"
+  locatorPoolRef: pool2
+  rules:
+  - selectors:
+    - endpointSelector:
+        matchLabels:
+          vrf: vrf01
+    destinationCIDRs:
+    - 0.0.0.0/0
