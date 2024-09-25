@@ -157,6 +157,7 @@ isovalentvrf.isovalent.com/vrf01 created
 
 ## Functional tests <a name = "tests"></a>
 
+```console
 taahoju3@containerlab01:~/cilium_srv6_lab/Containerlab$ kubectl get pods --all-namespaces
 NAMESPACE            NAME                                                              READY   STATUS    RESTARTS   AGE
 kube-system          cilium-462ww                                                      1/1     Running   0          9h
@@ -173,21 +174,26 @@ kube-system          kube-proxy-p9smn                                           
 kube-system          kube-scheduler-cilium-srv6-lab-cluster01-control-plane            1/1     Running   0          9h
 local-path-storage   local-path-provisioner-988d74bc-pjj7x                             1/1     Running   0          9h
 
+```
+```console
 taahoju3@containerlab01:~/cilium_srv6_lab/Containerlab$ kubectl -n kube-system logs cilium-462ww | grep "Allocated SID"
 Defaulted container "cilium-agent" out of: cilium-agent, config (init), mount-cgroup (init), apply-sysctl-overwrites (init), mount-bpf-fs (init), clean-cilium-state (init), install-cni-binaries (init)
 time="2024-08-05T21:21:09Z" level=info msg="Allocated SID for VRF with export route target." ExportRouteTarget="65001:1" LocatorPool=pool1 SID="fd00:1:0:e3f9:2baf::" VRF=vrf01 component=srv6.Manager.createIngressPathVRFs subsys=srv6-manager
-taahoju3@containerlab01:~/cilium_srv6_lab/Containerlab$ 
-taahoju3@containerlab01:~/cilium_srv6_lab/Containerlab$ 
-taahoju3@containerlab01:~/cilium_srv6_lab/Containerlab$ 
+```
+
+```console
 taahoju3@containerlab01:~/cilium_srv6_lab/Containerlab$ kubectl -n kube-system logs cilium-tsccc | grep "Allocated SID"
 Defaulted container "cilium-agent" out of: cilium-agent, config (init), mount-cgroup (init), apply-sysctl-overwrites (init), mount-bpf-fs (init), clean-cilium-state (init), install-cni-binaries (init)
 time="2024-08-05T21:21:09Z" level=info msg="Allocated SID for VRF with export route target." ExportRouteTarget="65001:1" LocatorPool=pool1 SID="fd00:1:0:b479:71f4::" VRF=vrf01 component=srv6.Manager.createIngressPathVRFs subsys=srv6-manager
-taahoju3@containerlab01:~/cilium_srv6_lab/Containerlab$ 
 
+```
+
+```console
 taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl get sidmanager -o custom-columns="NAME:.metadata.name,ALLOCATIONS:.spec.locatorAllocations"
 NAME                                      ALLOCATIONS
 cilium-srv6-lab-cluster01-control-plane   [map[locators:[map[behaviorType:uSID prefix:fd00:1:0:b479::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool1]]
 cilium-srv6-lab-cluster01-worker          [map[locators:[map[behaviorType:uSID prefix:fd00:1:0:e3f9::/64 structure:map[argumentLenBits:0 functionLenBits:32 locatorBlockLenBits:32 locatorNodeLenBits:16]]] poolRef:pool1]]
+```
 
 taahoju3@containerlab01:~/cilium_srv6_lab$ kubectx kind-cilium-srv6-lab-cluster02
 ✔ Switched to context "kind-cilium-srv6-lab-cluster02".
