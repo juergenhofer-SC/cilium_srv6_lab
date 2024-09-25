@@ -5,8 +5,7 @@
 - [About](#about)
 - [High Level Overview](#HLD)
 - [Getting Started](#getting_started)
-- [Usage](#usage)
-- [Contributing](../CONTRIBUTING.md)
+- [Functional tests](#tests)
 
 ## About <a name = "about"></a>
 
@@ -148,10 +147,7 @@ isovalentsrv6locatorpool.isovalent.com/pool2 created
 taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl apply -f vrf-policy-cluster2.yaml
 isovalentvrf.isovalent.com/vrf01 created
 
-## Usage <a name = "Debug"></a>
-
-
-! [Debug]  ### Debug / notepad section
+### Rebuild section
 
 # delete all nodes / destroy and rebuild clab
  kind delete clusters --all
@@ -159,8 +155,9 @@ isovalentvrf.isovalent.com/vrf01 created
  sudo clab destroy --cleanup -t Containerlab/topology.yaml
  sudo clab deploy -t Containerlab/topology.yaml
 
+## Functional tests <a name = "tests"></a>
 
- taahoju3@containerlab01:~/cilium_srv6_lab/Containerlab$ kubectl get pods --all-namespaces
+taahoju3@containerlab01:~/cilium_srv6_lab/Containerlab$ kubectl get pods --all-namespaces
 NAMESPACE            NAME                                                              READY   STATUS    RESTARTS   AGE
 kube-system          cilium-462ww                                                      1/1     Running   0          9h
 kube-system          cilium-operator-6568655999-2zcqs                                  1/1     Running   0          9h
