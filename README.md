@@ -168,9 +168,9 @@ taahoju3@containerlab01:~/cilium_srv6_lab$ kubectl apply -f vrf-policy-cluster2.
 isovalentvrf.isovalent.com/vrf01 created
 ```
 
-### Rebuild section
+## Rebuild section
 
-# delete all nodes / destroy and rebuild clab
+delete all nodes / destroy and rebuild clab
 
  kind delete clusters --all
   
