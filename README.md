@@ -126,11 +126,12 @@ NOTE: it is important that the CNI install is done after clab config!
  2. Create a cilium-enterprise-values.yaml
      This file keep track of your Cilium Enterprise configuration!
  3. Run helm install command to deploy Cilium Enterprise CNI
+```console
      helm install cilium isovalent/cilium --version 1.15.8 \
      --namespace kube-system \
   --set operator.replicas=1 \
   -f cilium-enterprise-values.yaml
-
+```
 Now that the base installation for Cilium Enterprise is complete, you can explore and enable advanced features, like SRv6.
 
 **Cilium SRv6 L3VPN**
