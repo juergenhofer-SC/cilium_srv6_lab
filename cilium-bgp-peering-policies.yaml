@@ -1,0 +1,57 @@
+# cilium-bgp-peering-policies.yaml 
+apiVersion: "cilium.io/v2alpha1"
+kind: CiliumBGPPeeringPolicy
+metadata:
+  name: cilium-srv6-lab-cluster01-control-plane
+spec:
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: "cilium-srv6-lab-cluster01-control-plane"
+  virtualRouters:
+    - localASN: 65000
+      mapSRv6VRFs: true
+      srv6LocatorPoolSelector:
+        matchLabels:
+          export: "true"
+      neighbors:
+    # Advertises a locator prefix to the underlay network with eBGP
+      - peerASN: 65000
+        peerAddress: "fd00:172:100:100::1/128"
+        families:
+        - {afi: "ipv6", safi: "unicast"}
+    # Advertise VPN route trough route-server, 
+    # peering with lo0 needs static route to reach it
+      - peerASN: 65000
+        peerAddress: "fc00:0:3333::1/128"
+        eBGPMultihopTTL: 255
+        families:
+        - {afi: "ipv4", safi: "mpls_vpn"}
+
+---
+apiVersion: "cilium.io/v2alpha1"
+kind: CiliumBGPPeeringPolicy
+metadata:
+  name: cilium-srv6-lab-cluster02-control-plane
+spec:
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: "cilium-srv6-lab-cluster02-control-plane"
+  virtualRouters:
+    - localASN: 65000
+      mapSRv6VRFs: true
+      srv6LocatorPoolSelector:
+        matchLabels:
+          export: "true"
+      neighbors:
+    # Advertises a locator prefix to the underlay network with eBGP
+      - peerAddress: "fd00:172:200:200::1/128"
+        peerASN: 65000
+        families:
+        - {afi: "ipv6", safi: "unicast"}
+    # Advertise VPN route trough route-server, 
+    # peering with lo0 needs static route to reach it
+      - peerASN: 65000
+        peerAddress: "fc00:0:3333::1/128"
+        eBGPMultihopTTL: 255
+        families:
+        - {afi: "ipv4", safi: "mpls_vpn"}

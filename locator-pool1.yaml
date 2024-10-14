@@ -1,0 +1,16 @@
+# Locator Pool 1
+apiVersion: isovalent.com/v1alpha1
+kind: IsovalentSRv6LocatorPool
+metadata:
+  name: pool1
+  labels:
+    export: "true"
+spec:
+  behaviorType: uSID
+  prefix: fd00:1::/40
+  locatorLenBits: 48
+  structure:
+    locatorBlockLenBits: 32
+    locatorNodeLenBits: 16
+    functionLenBits: 16
+    argumentLenBits: 0

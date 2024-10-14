@@ -15,5 +15,3 @@ nodes:
     nodeRegistration:
       kubeletExtraArgs:
         node-ip: "172.100.100.2,fd00:172:100:100::2"
-#BGP local peer address
-- role: worker
