@@ -42,9 +42,9 @@ These instructions will get you a copy of the project up and running on your loc
 
  5. Install Helm
 
-- curl <https://baltocdn.com/helm/signing.asc> | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
-- sudo apt-get install apt-transport-https --yes
-- echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg]   <https://baltocdn.com/helm/stable/debian/> all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+- $ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4
+- $ chmod 700 get_helm.sh
+- $ ./get_helm.sh
 
  6. Install kubectx to switch easy beetween cluster context
      (ref.: <https://github.com/ahmetb/kubectx/>)
@@ -251,4 +251,5 @@ Local AS   Peer AS   Peer Address              Session       Uptime    Family   
 65001      65000     fc00:0:3333::1:179        established   8h3m51s   ipv4/mpls_vpn   2          1
 65001      65000     fd00:172:100:100::1:179   established   8h26m7s   ipv6/unicast    3          1
 ```
+
 
