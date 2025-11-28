@@ -38,7 +38,7 @@ These instructions will get you a copy of the project up and running on your loc
 
  4. Install kind
 
-- [ $(uname -m) = x86_64 ] && curl -Lo ./kind <https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64> cmod +x ./kind
+- [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.30.0/kind-linux-amd64
 
  5. Install Helm
 
@@ -251,3 +251,4 @@ Local AS   Peer AS   Peer Address              Session       Uptime    Family   
 65001      65000     fc00:0:3333::1:179        established   8h3m51s   ipv4/mpls_vpn   2          1
 65001      65000     fd00:172:100:100::1:179   established   8h26m7s   ipv6/unicast    3          1
 ```
+
